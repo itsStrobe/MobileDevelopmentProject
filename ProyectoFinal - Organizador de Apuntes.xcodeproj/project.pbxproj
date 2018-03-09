@@ -13,6 +13,8 @@
 		FB894E77205336D50013B6FD /* ProyectoFinal___Organizador_de_Apuntes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FB894E75205336D50013B6FD /* ProyectoFinal___Organizador_de_Apuntes.xcdatamodeld */; };
 		FB894E79205336D50013B6FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB894E78205336D50013B6FD /* Assets.xcassets */; };
 		FB894E7C205336D50013B6FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB894E7A205336D50013B6FD /* LaunchScreen.storyboard */; };
+		FB894E842053377D0013B6FD /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E832053377D0013B6FD /* CourseTableViewCell.swift */; };
+		FB894E86205337860013B6FD /* NoteTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		FB894E78205336D50013B6FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB894E7B205336D50013B6FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB894E7D205336D50013B6FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB894E832053377D0013B6FD /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTypeSelectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			children = (
 				FB894E6E205336D50013B6FD /* AppDelegate.swift */,
 				FB894E70205336D50013B6FD /* ViewController.swift */,
+				FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */,
+				FB894E832053377D0013B6FD /* CourseTableViewCell.swift */,
 				FB894E72205336D50013B6FD /* Main.storyboard */,
 				FB894E78205336D50013B6FD /* Assets.xcassets */,
 				FB894E7A205336D50013B6FD /* LaunchScreen.storyboard */,
@@ -139,9 +145,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB894E842053377D0013B6FD /* CourseTableViewCell.swift in Sources */,
 				FB894E77205336D50013B6FD /* ProyectoFinal___Organizador_de_Apuntes.xcdatamodeld in Sources */,
 				FB894E71205336D50013B6FD /* ViewController.swift in Sources */,
 				FB894E6F205336D50013B6FD /* AppDelegate.swift in Sources */,
+				FB894E86205337860013B6FD /* NoteTypeSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
