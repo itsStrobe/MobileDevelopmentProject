@@ -7,13 +7,28 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var listCourses = [Course]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Cursos"
+        
+        let coursesRequest: NSFetchRequest<Course> = Course.fetchRequest()
+        
+        do {
+            let data = try PersistenceService.context.fetch(coursesRequest)
+            listCourses = data
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from courses")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,13 +36,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return listCourses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celda = tableView.dequeueReusableCell(withIdentifier: "cellCourse")!
+        let celda = tableView.dequeueReusableCell(withIdentifier: "cellCourse") as! CourseTableViewCell
+        celda.lbCourseName.text = listCourses[indexPath.row].name
         return celda
     }
     

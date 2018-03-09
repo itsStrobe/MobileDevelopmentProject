@@ -9,9 +9,10 @@
 import UIKit
 
 class CourseTableViewCell: UITableViewCell {
+    @IBOutlet weak var lbCourseName: UILabel!
     
-    var nomCurso : String!
-
+    var courseName: String!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -15,6 +15,10 @@
 		FB894E7C205336D50013B6FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB894E7A205336D50013B6FD /* LaunchScreen.storyboard */; };
 		FB894E842053377D0013B6FD /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E832053377D0013B6FD /* CourseTableViewCell.swift */; };
 		FB894E86205337860013B6FD /* NoteTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */; };
+		FB894E88205345D00013B6FD /* CourseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E87205345D00013B6FD /* CourseInfoViewController.swift */; };
+		FB894E8A205348AA0013B6FD /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E89205348AA0013B6FD /* PersistenceService.swift */; };
+		FB894E8D20534AB00013B6FD /* Course+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E8B20534AB00013B6FD /* Course+CoreDataClass.swift */; };
+		FB894E8E20534AB00013B6FD /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E8C20534AB00013B6FD /* Course+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		FB894E7D205336D50013B6FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB894E832053377D0013B6FD /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTypeSelectionViewController.swift; sourceTree = "<group>"; };
+		FB894E87205345D00013B6FD /* CourseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoViewController.swift; sourceTree = "<group>"; };
+		FB894E89205348AA0013B6FD /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		FB894E8B20534AB00013B6FD /* Course+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FB894E8C20534AB00013B6FD /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +68,15 @@
 		FB894E6D205336D50013B6FD /* ProyectoFinal - Organizador de Apuntes */ = {
 			isa = PBXGroup;
 			children = (
+				FB894E8B20534AB00013B6FD /* Course+CoreDataClass.swift */,
+				FB894E8C20534AB00013B6FD /* Course+CoreDataProperties.swift */,
 				FB894E6E205336D50013B6FD /* AppDelegate.swift */,
 				FB894E70205336D50013B6FD /* ViewController.swift */,
 				FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */,
 				FB894E832053377D0013B6FD /* CourseTableViewCell.swift */,
 				FB894E72205336D50013B6FD /* Main.storyboard */,
+				FB894E89205348AA0013B6FD /* PersistenceService.swift */,
+				FB894E87205345D00013B6FD /* CourseInfoViewController.swift */,
 				FB894E78205336D50013B6FD /* Assets.xcassets */,
 				FB894E7A205336D50013B6FD /* LaunchScreen.storyboard */,
 				FB894E7D205336D50013B6FD /* Info.plist */,
@@ -145,11 +157,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB894E8A205348AA0013B6FD /* PersistenceService.swift in Sources */,
 				FB894E842053377D0013B6FD /* CourseTableViewCell.swift in Sources */,
+				FB894E8D20534AB00013B6FD /* Course+CoreDataClass.swift in Sources */,
 				FB894E77205336D50013B6FD /* ProyectoFinal___Organizador_de_Apuntes.xcdatamodeld in Sources */,
+				FB894E8E20534AB00013B6FD /* Course+CoreDataProperties.swift in Sources */,
 				FB894E71205336D50013B6FD /* ViewController.swift in Sources */,
 				FB894E6F205336D50013B6FD /* AppDelegate.swift in Sources */,
 				FB894E86205337860013B6FD /* NoteTypeSelectionViewController.swift in Sources */,
+				FB894E88205345D00013B6FD /* CourseInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
