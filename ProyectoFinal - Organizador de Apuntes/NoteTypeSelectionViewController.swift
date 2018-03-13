@@ -10,28 +10,32 @@ import UIKit
 
 class NoteTypeSelectionViewController: UIViewController {
     
-    var nomCourse : String! = "<Materia>"
+    var currentCourse : Course!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = nomCourse
+        self.title = currentCourse.name
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let viewMaterial = segue.destination as! CourseMaterialViewController
+        
+        viewMaterial.currentCourse = self.currentCourse
+        if segue.identifier == "practice" {
+            viewMaterial.isTheory = false
+        }
+        else {
+            viewMaterial.isTheory = true
+        }
     }
-    */
 
 }

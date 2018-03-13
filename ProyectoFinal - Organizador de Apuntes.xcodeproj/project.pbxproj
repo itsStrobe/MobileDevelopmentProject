@@ -7,21 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB20BE1120587F400001C4F1 /* CourseMaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */; };
+		FB20BE1C205889B70001C4F1 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE19205889B70001C4F1 /* Note+CoreDataClass.swift */; };
+		FB20BE1D205889B70001C4F1 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE1A205889B70001C4F1 /* Note+CoreDataProperties.swift */; };
+		FB20BE1F20588A1C0001C4F1 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE1E20588A1C0001C4F1 /* Course+CoreDataProperties.swift */; };
 		FB894E6F205336D50013B6FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E6E205336D50013B6FD /* AppDelegate.swift */; };
 		FB894E71205336D50013B6FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E70205336D50013B6FD /* ViewController.swift */; };
 		FB894E74205336D50013B6FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB894E72205336D50013B6FD /* Main.storyboard */; };
 		FB894E77205336D50013B6FD /* ProyectoFinal___Organizador_de_Apuntes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FB894E75205336D50013B6FD /* ProyectoFinal___Organizador_de_Apuntes.xcdatamodeld */; };
 		FB894E79205336D50013B6FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB894E78205336D50013B6FD /* Assets.xcassets */; };
 		FB894E7C205336D50013B6FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB894E7A205336D50013B6FD /* LaunchScreen.storyboard */; };
-		FB894E842053377D0013B6FD /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E832053377D0013B6FD /* CourseTableViewCell.swift */; };
+		FB894E842053377D0013B6FD /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E832053377D0013B6FD /* CustomTableViewCell.swift */; };
 		FB894E86205337860013B6FD /* NoteTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */; };
 		FB894E88205345D00013B6FD /* CourseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E87205345D00013B6FD /* CourseInfoViewController.swift */; };
 		FB894E8A205348AA0013B6FD /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E89205348AA0013B6FD /* PersistenceService.swift */; };
 		FB894E8D20534AB00013B6FD /* Course+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E8B20534AB00013B6FD /* Course+CoreDataClass.swift */; };
-		FB894E8E20534AB00013B6FD /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E8C20534AB00013B6FD /* Course+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMaterialViewController.swift; sourceTree = "<group>"; };
+		FB20BE19205889B70001C4F1 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FB20BE1A205889B70001C4F1 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FB20BE1E20588A1C0001C4F1 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FB894E6B205336D50013B6FD /* ProyectoFinal - Organizador de Apuntes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ProyectoFinal - Organizador de Apuntes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB894E6E205336D50013B6FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB894E70205336D50013B6FD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,12 +37,11 @@
 		FB894E78205336D50013B6FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB894E7B205336D50013B6FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB894E7D205336D50013B6FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB894E832053377D0013B6FD /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		FB894E832053377D0013B6FD /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTypeSelectionViewController.swift; sourceTree = "<group>"; };
 		FB894E87205345D00013B6FD /* CourseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoViewController.swift; sourceTree = "<group>"; };
 		FB894E89205348AA0013B6FD /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		FB894E8B20534AB00013B6FD /* Course+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FB894E8C20534AB00013B6FD /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,13 +74,16 @@
 		FB894E6D205336D50013B6FD /* ProyectoFinal - Organizador de Apuntes */ = {
 			isa = PBXGroup;
 			children = (
+				FB20BE1E20588A1C0001C4F1 /* Course+CoreDataProperties.swift */,
+				FB20BE19205889B70001C4F1 /* Note+CoreDataClass.swift */,
+				FB20BE1A205889B70001C4F1 /* Note+CoreDataProperties.swift */,
 				FB894E8B20534AB00013B6FD /* Course+CoreDataClass.swift */,
-				FB894E8C20534AB00013B6FD /* Course+CoreDataProperties.swift */,
 				FB894E6E205336D50013B6FD /* AppDelegate.swift */,
 				FB894E70205336D50013B6FD /* ViewController.swift */,
 				FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */,
-				FB894E832053377D0013B6FD /* CourseTableViewCell.swift */,
+				FB894E832053377D0013B6FD /* CustomTableViewCell.swift */,
 				FB894E72205336D50013B6FD /* Main.storyboard */,
+				FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */,
 				FB894E89205348AA0013B6FD /* PersistenceService.swift */,
 				FB894E87205345D00013B6FD /* CourseInfoViewController.swift */,
 				FB894E78205336D50013B6FD /* Assets.xcassets */,
@@ -158,13 +167,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB894E8A205348AA0013B6FD /* PersistenceService.swift in Sources */,
-				FB894E842053377D0013B6FD /* CourseTableViewCell.swift in Sources */,
+				FB894E842053377D0013B6FD /* CustomTableViewCell.swift in Sources */,
 				FB894E8D20534AB00013B6FD /* Course+CoreDataClass.swift in Sources */,
+				FB20BE1D205889B70001C4F1 /* Note+CoreDataProperties.swift in Sources */,
 				FB894E77205336D50013B6FD /* ProyectoFinal___Organizador_de_Apuntes.xcdatamodeld in Sources */,
-				FB894E8E20534AB00013B6FD /* Course+CoreDataProperties.swift in Sources */,
 				FB894E71205336D50013B6FD /* ViewController.swift in Sources */,
+				FB20BE1120587F400001C4F1 /* CourseMaterialViewController.swift in Sources */,
 				FB894E6F205336D50013B6FD /* AppDelegate.swift in Sources */,
+				FB20BE1C205889B70001C4F1 /* Note+CoreDataClass.swift in Sources */,
 				FB894E86205337860013B6FD /* NoteTypeSelectionViewController.swift in Sources */,
+				FB20BE1F20588A1C0001C4F1 /* Course+CoreDataProperties.swift in Sources */,
 				FB894E88205345D00013B6FD /* CourseInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol protocolManageCourses {
+    func addCourse(course: Course)
+    func delCourse(course: Course)
+}
+
 class CourseInfoViewController: UIViewController {
     
     @IBOutlet weak var lbCourseName: UITextField!
@@ -15,28 +20,31 @@ class CourseInfoViewController: UIViewController {
     @IBOutlet weak var lbEmail: UITextField!
     @IBOutlet weak var lbOffice: UITextField!
     @IBOutlet weak var lbTutoring: UITextField!
+    @IBOutlet weak var btAction: UIButton!
+    @IBOutlet weak var btDelete: UIButton!
     
-    var courseName = ""
-    var professorName = ""
-    var email = ""
-    var office = ""
-    var tutoring = ""
+    var isNew : Bool!
+    var currentCourse : Course!
+    var courseView : protocolManageCourses!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Información del Curso"
+        btDelete.isHidden = true
 
-        lbCourseName.text = courseName
-        lbProfessorName.text = professorName
-        lbEmail.text = email
-        lbOffice.text = office
-        lbTutoring.text = tutoring
-        
-        self.title = "Informacion del Curso"
+        if isNew == false {
+            lbCourseName.text = currentCourse.name
+            lbProfessorName.text = currentCourse.professor
+            lbEmail.text = currentCourse.email
+            lbOffice.text = currentCourse.office
+            lbTutoring.text = currentCourse.tutoring
+            btAction.setTitle("Editar", for: .normal)
+            btDelete.isHidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func saveCourse(_ sender: UIButton) {
@@ -47,7 +55,7 @@ class CourseInfoViewController: UIViewController {
             course.email = lbEmail.text
             course.office = lbOffice.text
             course.tutoring = lbOffice.text
-            PersistenceService.saveContext()
+            courseView.addCourse(course: course)
             navigationController?.popViewController(animated: true)
         } else {
             let alert = UIAlertController(title: "Faltan datos", message: "El campo nombre es obligatorio.", preferredStyle: .alert)
@@ -56,6 +64,10 @@ class CourseInfoViewController: UIViewController {
         }
     }
     
+    @IBAction func deleteCourse(_ sender: UIButton) {
+        courseView.delCourse(course: currentCourse)
+        navigationController?.popViewController(animated: true)
+    }
     /*
     // MARK: - Navigation
 

@@ -1,5 +1,5 @@
 //
-//  CourseTableViewCell.swift
+//  CustomTableViewCell.swift
 //  Organizador De Apuntes
 //
 //  Created by Alumno on 3/9/18.
@@ -8,19 +8,16 @@
 
 import UIKit
 
-class CourseTableViewCell: UITableViewCell {
-    @IBOutlet weak var lbCourseName: UILabel!
+class CustomTableViewCell: UITableViewCell {
+    @IBOutlet weak var lbName: UILabel!
     
-    var courseName: String!
+    var name: String!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 }
