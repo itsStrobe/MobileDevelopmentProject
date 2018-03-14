@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, protocolManageMaterial {
     
     @IBOutlet weak var tableView: UITableView!
     var isTheory : Bool!
@@ -52,15 +52,31 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(50)
     }
+    
+    func addMaterial(material: Note) {
+        material.isTheory = self.isTheory
+        currentCourse.addToHasNote(material)
+        listNotes.append(material)
+        PersistenceService.saveContext()
+        tableView.reloadData()
+    }
+    
+    func delMaterial(material: Note) {
+        
+    }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "noteContent" {
+            
+        } else if segue.identifier == "newNote" {
+            let viewNoteContent = segue.destination as! NoteContentViewController
+            viewNoteContent.currentCourse = self.currentCourse
+            viewNoteContent.materialView = self
+        } else {
+            
+        }
     }
-    */
 
 }

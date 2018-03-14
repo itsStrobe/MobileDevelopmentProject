@@ -21,7 +21,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.title = "Cursos"
         
         let coursesRequest: NSFetchRequest<Course> = Course.fetchRequest()
-        print("Hello")
         
         do {
             let data = try PersistenceService.context.fetch(coursesRequest)
