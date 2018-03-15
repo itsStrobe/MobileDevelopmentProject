@@ -19,13 +19,25 @@ class MaterialInfoViewController: UIViewController {
     @IBOutlet weak var tfName: UITextField!
     @IBOutlet weak var tfTopic: UITextField!
     @IBOutlet weak var tfPartial: UITextField!
+    @IBOutlet weak var btDelete: UIButton!
     
-    var noteText : String!
+    var isNewNote: Bool!
+    var noteText: String!
     var currentCourse: Course!
-    var materialView : protocolManageMaterial!
+    var materialView: protocolManageMaterial!
+    var currentNote: Note!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !isNewNote {
+            tfName.text = currentNote.name
+            tfTopic.text = currentNote.topic
+            tfPartial.text = String(currentNote.partial)
+            datePicker.setDate(currentNote.date! as Date, animated: false)
+        } else {
+            btDelete.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +45,7 @@ class MaterialInfoViewController: UIViewController {
     }
     
     @IBAction func saveMaterialInfo(_ sender: UIButton) {
-        if let materialName = tfName.text, let materialTopic = tfTopic.text, let materialPartial = tfPartial.text {
+        if let materialName = tfName.text, let materialTopic = tfTopic.text, let materialPartial = tfPartial.text, !materialName.isEmpty, !materialTopic.isEmpty, !materialPartial.isEmpty {
             let materialDate = datePicker.date
             let material = Note(context: PersistenceService.context)
             material.name = materialName
@@ -42,11 +54,19 @@ class MaterialInfoViewController: UIViewController {
             material.text = noteText
             material.date = NSDate(timeInterval: 0, since: materialDate)
             materialView.addMaterial(material: material)
+            navigationController?.popToViewController(materialView as! CourseMaterialViewController, animated: true)
         } else {
             let alert = UIAlertController(title: "Faltan datos", message: "Es necesario llenar todos los campos", preferredStyle: .alert)
             let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alert.addAction(action)
+            present(alert, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func deleteCourse(_ sender: UIButton) {
+        print(currentNote.name!)
+        materialView.delMaterial(material: currentNote)
+        navigationController?.popViewController(animated: true)
     }
     
     /*

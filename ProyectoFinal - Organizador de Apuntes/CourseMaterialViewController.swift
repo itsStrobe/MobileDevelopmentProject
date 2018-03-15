@@ -13,6 +13,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var tableView: UITableView!
     var isTheory : Bool!
+    var lastSelectedCell : Int!
     var currentCourse : Course!
     var listNotes = [Note]()
     
@@ -20,9 +21,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         
         let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        
         let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@", NSNumber(value: isTheory), currentCourse.name!)
-        
         notesRequest.predicate = predicate
         
         do {
@@ -44,7 +43,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celda = tableView.dequeueReusableCell(withIdentifier: "cellMaterial") as! CustomTableViewCell
+        let celda = tableView.dequeueReusableCell(withIdentifier: "cellMaterial") as! MaterialTableViewCell
         celda.lbName.text = listNotes[indexPath.row].name
         return celda
     }
@@ -62,20 +61,38 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func delMaterial(material: Note) {
-        
+        PersistenceService.context.delete(material)
+        listNotes.remove(at: lastSelectedCell)
+        self.tableView.reloadData()
+        PersistenceService.saveContext()
     }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "noteContent" {
-            
+            let viewNoteContent = segue.destination as! NoteContentViewController
+            let indexPath = tableView.indexPathForSelectedRow!
+            viewNoteContent.materialView = self
+            viewNoteContent.currentCourse = self.currentCourse
+            viewNoteContent.currentNote = listNotes[indexPath.row]
+            viewNoteContent.isNewNote = false
         } else if segue.identifier == "newNote" {
             let viewNoteContent = segue.destination as! NoteContentViewController
             viewNoteContent.currentCourse = self.currentCourse
             viewNoteContent.materialView = self
+            viewNoteContent.isNewNote = true
         } else {
+            let viewMaterialInfo = segue.destination as! MaterialInfoViewController
+            let button = sender as! UIButton
+            let view = button.superview!
+            let cell = view.superview! as! MaterialTableViewCell
+            let indexPath = tableView.indexPath(for: cell)!
+            lastSelectedCell = indexPath.row
             
+            viewMaterialInfo.currentNote = listNotes[lastSelectedCell]
+            viewMaterialInfo.isNewNote = false
+            viewMaterialInfo.materialView = self
         }
     }
 
