@@ -31,11 +31,13 @@ class MaterialInfoViewController: UIViewController {
         super.viewDidLoad()
         
         if !isNewNote {
+            self.title = "Info de " + currentNote.name!
             tfName.text = currentNote.name
             tfTopic.text = currentNote.topic
             tfPartial.text = String(currentNote.partial)
             datePicker.setDate(currentNote.date! as Date, animated: false)
         } else {
+            self.title = "Info de Nueva Nota"
             btDelete.isHidden = true
         }
     }

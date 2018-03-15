@@ -48,7 +48,7 @@ class CourseInfoViewController: UIViewController {
     }
     
     @IBAction func saveCourse(_ sender: UIButton) {
-        if let name = lbCourseName.text {
+        if let name = lbCourseName.text , !name.isEmpty {
             let course = Course(context: PersistenceService.context)
             course.name = name
             course.professor = lbProfessorName.text

@@ -58,6 +58,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func delCourse(course: Course) {
+        if let courseNotes = course.hasNote?.allObjects {
+            for note in courseNotes {
+                PersistenceService.context.delete(note as! NSManagedObject)
+            }
+        }
+        
         PersistenceService.context.delete(course)
         listCourses.remove(at: lastSelectedCell)
         self.tableView.reloadData()

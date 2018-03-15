@@ -20,6 +20,12 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if isTheory {
+            self.title = currentCourse.name! + ": Teoría"
+        } else {
+            self.title = currentCourse.name! + ": Práctica"
+        }
+        
         let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@", NSNumber(value: isTheory), currentCourse.name!)
         notesRequest.predicate = predicate
