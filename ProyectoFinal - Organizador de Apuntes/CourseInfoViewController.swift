@@ -54,7 +54,7 @@ class CourseInfoViewController: UIViewController {
             course.professor = lbProfessorName.text
             course.email = lbEmail.text
             course.office = lbOffice.text
-            course.tutoring = lbOffice.text
+            course.tutoring = lbTutoring.text
             courseView.addCourse(course: course)
             navigationController?.popViewController(animated: true)
         } else {
@@ -65,8 +65,16 @@ class CourseInfoViewController: UIViewController {
     }
     
     @IBAction func deleteCourse(_ sender: UIButton) {
-        courseView.delCourse(course: currentCourse)
-        navigationController?.popViewController(animated: true)
+        let deleteAlert = UIAlertController(title: "¿Estás seguro de que deseas eliminar el curso?", message: "Toda la información del curso y sus contenidos serán eliminados.", preferredStyle: .alert)
+        
+        deleteAlert.addAction(UIAlertAction(title: "Confirmar", style: .destructive, handler: { (action: UIAlertAction!) in
+            self.courseView.delCourse(course: self.currentCourse)
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        present(deleteAlert, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation
