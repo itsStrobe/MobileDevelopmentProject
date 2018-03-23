@@ -21,7 +21,7 @@ class NoteContentViewController: UIViewController {
         
         if !isNewNote {
             tvNoteText.text = currentNote.text
-            self.title = currentNote.text
+            self.title = currentNote.name
         } else {
             self.title = "Nueva Nota"
         }
