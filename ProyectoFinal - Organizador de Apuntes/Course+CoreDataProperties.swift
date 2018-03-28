@@ -2,7 +2,7 @@
 //  Course+CoreDataProperties.swift
 //  ProyectoFinal - Organizador de Apuntes
 //
-//  Created by Alumno on 3/13/18.
+//  Created by Angel Seiji Morimoto Burgos on 3/27/18.
 //  Copyright © 2018 itesm. All rights reserved.
 //
 //

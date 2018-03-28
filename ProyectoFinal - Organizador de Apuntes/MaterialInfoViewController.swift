@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 protocol protocolManageMaterial {
-    func addMaterial(material: Note)
+    func addMaterial(material: Note, listImages: [UIImage])
     func delMaterial(material: Note)
+    func getNextImageId() -> Int
 }
 
 class MaterialInfoViewController: UIViewController {
@@ -23,6 +25,7 @@ class MaterialInfoViewController: UIViewController {
     
     var isNewNote: Bool!
     var noteText: String!
+    var listImages: [UIImage]!
     var currentCourse: Course!
     var materialView: protocolManageMaterial!
     var currentNote: Note!
@@ -55,7 +58,7 @@ class MaterialInfoViewController: UIViewController {
             material.partial = Int16(materialPartial)!
             material.text = noteText
             material.date = NSDate(timeInterval: 0, since: materialDate)
-            materialView.addMaterial(material: material)
+            materialView.addMaterial(material: material, listImages: listImages)
             navigationController?.popToViewController(materialView as! CourseMaterialViewController, animated: true)
         } else {
             let alert = UIAlertController(title: "Faltan datos", message: "Es necesario llenar todos los campos", preferredStyle: .alert)

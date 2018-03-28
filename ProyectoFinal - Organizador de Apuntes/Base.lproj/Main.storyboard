@@ -427,11 +427,25 @@
                                 <rect key="frame" x="16" y="81" width="343" height="187"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellImage" id="cgu-9G-dtT">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cgu-9G-dtT" id="Hmm-QC-hE3">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="w69-40-xi6" id="rOS-QS-cUW"/>
+                                    <outlet property="delegate" destination="w69-40-xi6" id="ubY-Hb-KmR"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPB-PC-8CC">
-                                <rect key="frame" x="16" y="286" width="343" height="39"/>
+                                <rect key="frame" x="16" y="286" width="164" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Nuevo"/>
+                                <state key="normal" title="Nueva foto"/>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="&lt;Insertar texto aquí&gt;" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NZe-fC-roN">
                                 <rect key="frame" x="16" y="333" width="343" height="230"/>
@@ -448,11 +462,20 @@
                                     <segue destination="QB2-qL-0Lf" kind="show" identifier="saveNote" id="1bV-OY-Vc2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CR6-QG-nio">
+                                <rect key="frame" x="205" y="290" width="154" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Galeria"/>
+                                <connections>
+                                    <action selector="openPhotoLibrary:" destination="w69-40-xi6" eventType="touchUpInside" id="nrb-8y-seU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.78499537706375122" green="0.7434203028678894" blue="0.82603567838668823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="bOL-gs-y17"/>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="IDd-Xr-Q41" id="YEx-9i-NWi"/>
                         <outlet property="tvNoteText" destination="NZe-fC-roN" id="AEd-qm-eMy"/>
                     </connections>
                 </viewController>

@@ -52,9 +52,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func addCourse(course: Course) {
+        PersistenceService.saveContext()
         self.listCourses.append(course)
         self.tableView.reloadData()
-        PersistenceService.saveContext()
     }
     
     func delCourse(course: Course) {
@@ -65,9 +65,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         PersistenceService.context.delete(course)
+        PersistenceService.saveContext()
         listCourses.remove(at: lastSelectedCell)
         self.tableView.reloadData()
-        PersistenceService.saveContext()
     }
 
      // MARK: - Navigation

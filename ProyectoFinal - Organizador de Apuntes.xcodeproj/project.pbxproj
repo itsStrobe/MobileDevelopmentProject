@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B65E18AA2069AF4B0012FD4D /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65E18A72069AF4B0012FD4D /* Image+CoreDataClass.swift */; };
+		B67D2F98206B425500533DAF /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67D2F97206B425500533DAF /* Course+CoreDataProperties.swift */; };
+		B68107222069FE53008CE786 /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B681071F2069FE53008CE786 /* Image+CoreDataProperties.swift */; };
+		B68107232069FE53008CE786 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68107202069FE53008CE786 /* Note+CoreDataProperties.swift */; };
 		FB20BE1120587F400001C4F1 /* CourseMaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */; };
 		FB20BE1C205889B70001C4F1 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE19205889B70001C4F1 /* Note+CoreDataClass.swift */; };
-		FB20BE1F20588A1C0001C4F1 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE1E20588A1C0001C4F1 /* Course+CoreDataProperties.swift */; };
 		FB894E6F205336D50013B6FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E6E205336D50013B6FD /* AppDelegate.swift */; };
 		FB894E71205336D50013B6FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB894E70205336D50013B6FD /* ViewController.swift */; };
 		FB894E74205336D50013B6FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB894E72205336D50013B6FD /* Main.storyboard */; };
@@ -24,13 +27,15 @@
 		FBA75B112058990100546CEE /* MaterialInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA75B102058990100546CEE /* MaterialInfoViewController.swift */; };
 		FBA75B1320589C3100546CEE /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA75B1220589C3100546CEE /* MaterialTableViewCell.swift */; };
 		FBA75B152058A23D00546CEE /* NoteContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA75B142058A23D00546CEE /* NoteContentViewController.swift */; };
-		FBA75B172058A9A200546CEE /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA75B162058A9A200546CEE /* Note+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B65E18A72069AF4B0012FD4D /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B67D2F97206B425500533DAF /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B681071F2069FE53008CE786 /* Image+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B68107202069FE53008CE786 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMaterialViewController.swift; sourceTree = "<group>"; };
 		FB20BE19205889B70001C4F1 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FB20BE1E20588A1C0001C4F1 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FB894E6B205336D50013B6FD /* ProyectoFinal - Organizador de Apuntes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ProyectoFinal - Organizador de Apuntes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB894E6E205336D50013B6FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB894E70205336D50013B6FD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,7 +52,6 @@
 		FBA75B102058990100546CEE /* MaterialInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialInfoViewController.swift; sourceTree = "<group>"; };
 		FBA75B1220589C3100546CEE /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTableViewCell.swift; sourceTree = "<group>"; };
 		FBA75B142058A23D00546CEE /* NoteContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentViewController.swift; sourceTree = "<group>"; };
-		FBA75B162058A9A200546CEE /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +84,10 @@
 		FB894E6D205336D50013B6FD /* ProyectoFinal - Organizador de Apuntes */ = {
 			isa = PBXGroup;
 			children = (
-				FB20BE1E20588A1C0001C4F1 /* Course+CoreDataProperties.swift */,
-				FBA75B162058A9A200546CEE /* Note+CoreDataProperties.swift */,
+				B681071F2069FE53008CE786 /* Image+CoreDataProperties.swift */,
+				B68107202069FE53008CE786 /* Note+CoreDataProperties.swift */,
+				B67D2F97206B425500533DAF /* Course+CoreDataProperties.swift */,
+				B65E18A72069AF4B0012FD4D /* Image+CoreDataClass.swift */,
 				FB20BE19205889B70001C4F1 /* Note+CoreDataClass.swift */,
 				FB894E8B20534AB00013B6FD /* Course+CoreDataClass.swift */,
 				FB894E6E205336D50013B6FD /* AppDelegate.swift */,
@@ -181,15 +187,17 @@
 				FB894E77205336D50013B6FD /* ProyectoFinal___Organizador_de_Apuntes.xcdatamodeld in Sources */,
 				FB894E71205336D50013B6FD /* ViewController.swift in Sources */,
 				FBA75B1320589C3100546CEE /* MaterialTableViewCell.swift in Sources */,
+				B68107222069FE53008CE786 /* Image+CoreDataProperties.swift in Sources */,
 				FBA75B152058A23D00546CEE /* NoteContentViewController.swift in Sources */,
 				FB20BE1120587F400001C4F1 /* CourseMaterialViewController.swift in Sources */,
+				B68107232069FE53008CE786 /* Note+CoreDataProperties.swift in Sources */,
 				FB894E6F205336D50013B6FD /* AppDelegate.swift in Sources */,
 				FB20BE1C205889B70001C4F1 /* Note+CoreDataClass.swift in Sources */,
 				FB894E86205337860013B6FD /* NoteTypeSelectionViewController.swift in Sources */,
-				FB20BE1F20588A1C0001C4F1 /* Course+CoreDataProperties.swift in Sources */,
+				B65E18AA2069AF4B0012FD4D /* Image+CoreDataClass.swift in Sources */,
 				FB894E88205345D00013B6FD /* CourseInfoViewController.swift in Sources */,
 				FBA75B112058990100546CEE /* MaterialInfoViewController.swift in Sources */,
-				FBA75B172058A9A200546CEE /* Note+CoreDataProperties.swift in Sources */,
+				B67D2F98206B425500533DAF /* Course+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
