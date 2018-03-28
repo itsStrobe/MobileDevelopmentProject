@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol protocolManageCourses {
     func addCourse(course: Course)
@@ -47,16 +48,40 @@ class CourseInfoViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    func isCourseRegistered(courseName: String) -> Bool {
+        let coursesRequest: NSFetchRequest<Course> = Course.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "name == %@", courseName)
+        coursesRequest.predicate = predicate
+        
+        do {
+            let matchedCourses = try PersistenceService.context.fetch(coursesRequest)
+            if matchedCourses.count == 0 {
+                return false
+            }
+            return true
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from courses")
+            return true
+        }
+    }
+    
     @IBAction func saveCourse(_ sender: UIButton) {
         if let name = lbCourseName.text , !name.isEmpty {
-            let course = Course(context: PersistenceService.context)
-            course.name = name
-            course.professor = lbProfessorName.text
-            course.email = lbEmail.text
-            course.office = lbOffice.text
-            course.tutoring = lbTutoring.text
-            courseView.addCourse(course: course)
-            navigationController?.popViewController(animated: true)
+            if !isCourseRegistered(courseName: name) {
+                let course = Course(context: PersistenceService.context)
+                course.name = name
+                course.professor = lbProfessorName.text
+                course.email = lbEmail.text
+                course.office = lbOffice.text
+                course.tutoring = lbTutoring.text
+                courseView.addCourse(course: course)
+                navigationController?.popViewController(animated: true)
+            } else {
+                let alert = UIAlertController(title: "Curso ya registrado", message: "El curso '\(name)' ya existe. Por favor utilice otro nombre.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
         } else {
             let alert = UIAlertController(title: "Faltan datos", message: "El campo nombre es obligatorio.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
