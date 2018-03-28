@@ -502,13 +502,16 @@
                         <viewLayoutGuide key="safeArea" id="bOL-gs-y17"/>
                     </view>
                     <connections>
+                        <outlet property="btNewPhoto" destination="DPB-PC-8CC" id="fhJ-2j-V2N"/>
+                        <outlet property="btPhotoLibrary" destination="CR6-QG-nio" id="fYC-qX-ohq"/>
+                        <outlet property="btSaveEdit" destination="hd8-HC-1il" id="DjI-xa-RSL"/>
                         <outlet property="tableView" destination="IDd-Xr-Q41" id="YEx-9i-NWi"/>
                         <outlet property="tvNoteText" destination="NZe-fC-roN" id="AEd-qm-eMy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VN9-nE-gSi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1317.5999999999999" y="1055.6221889055473"/>
+            <point key="canvasLocation" x="1318" y="1149"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8fB-Gd-YZt">
@@ -662,7 +665,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1bV-OY-Vc2"/>
+        <segue reference="KLl-vS-RZA"/>
         <segue reference="DwF-K3-Mzj"/>
         <segue reference="29D-en-Qb4"/>
         <segue reference="C5s-5c-OTV"/>

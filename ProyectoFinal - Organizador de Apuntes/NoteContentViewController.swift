@@ -13,8 +13,12 @@ class NoteContentViewController: UIViewController {
 
     @IBOutlet weak var tvNoteText: UITextView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var btNewPhoto: UIButton!
+    @IBOutlet weak var btPhotoLibrary: UIButton!
+    @IBOutlet weak var btSaveEdit: UIButton!
     
     var isNewNote: Bool!
+    var originalImagesCount: Int!
     var listImages: [UIImage]!
     var listImagesId: [Int]!
     var nextImageId: Int!
@@ -29,11 +33,17 @@ class NoteContentViewController: UIViewController {
         nextImageId = CoreDataUtilities.getNextImageId()
         
         if !isNewNote {
-            tvNoteText.text = currentNote.text
             self.title = currentNote.name
+            tvNoteText.text = currentNote.text
+            tvNoteText.isEditable = false
+            btNewPhoto.isEnabled = false
+            btPhotoLibrary.isEnabled = false
+            btSaveEdit.setTitle("Editar", for: .normal)
             loadImages()
+            originalImagesCount = listImages.count
         } else {
             self.title = "Nueva Nota"
+            originalImagesCount = 0
         }
     }
 
@@ -63,6 +73,22 @@ class NoteContentViewController: UIViewController {
             listImagesId.append(Int(imageCoreData.id))
         }
     }
+    
+    func saveNewImages() {
+        var imageId = CoreDataUtilities.getNextImageId()
+        
+        for index in originalImagesCount ..< listImages.count {
+            if CoreDataUtilities.saveToDocumentDirectory(image: listImages[index], id: imageId) {
+                let imageAsCoreData = Image(context: PersistenceService.context)
+                imageAsCoreData.id = Int32(imageId)
+                currentNote.addToHasImage(imageAsCoreData)
+                imageId = imageId + 1
+            } else {
+                print("Could not save image #", imageId)
+            }
+        }
+        PersistenceService.saveContext()
+    }
 
     @IBAction func openPhotoLibrary(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -80,6 +106,16 @@ class NoteContentViewController: UIViewController {
         if isNewNote {
             return true
         }
+        
+        if btSaveEdit.currentTitle == "Editar" {
+            btSaveEdit.setTitle("Guardar", for: .normal)
+            btNewPhoto.isEnabled = true
+            btPhotoLibrary.isEnabled = true
+            tvNoteText.isEditable = true
+            return false
+        }
+        
+        saveNewImages()
         navigationController?.popViewController(animated: true)
         return false
     }

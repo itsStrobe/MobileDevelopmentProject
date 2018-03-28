@@ -11,6 +11,8 @@ import CoreData
 
 class CoreDataUtilities: NSObject {
     
+    static let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+    
     static func getNextImageId() -> Int {
         let imageRequest: NSFetchRequest<Image> = Image.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "id == max(id)")
@@ -26,5 +28,18 @@ class CoreDataUtilities: NSObject {
             print("Could not retrieve the max id of an image")
         }
         return 1
+    }
+    
+    static func saveToDocumentDirectory(image: UIImage, id: Int) -> Bool {
+        let path = documentDirectory.appendingPathComponent(String(id))
+        var successWrite: Bool = false
+        
+        if let imageAsData = UIImagePNGRepresentation(image) {
+            successWrite = NSData(data: imageAsData).write(toFile: path, atomically: true)
+        } else if let imageAsData = UIImageJPEGRepresentation(image, 1.0){
+            successWrite = NSData(data: imageAsData).write(toFile: path, atomically: true)
+        }
+        
+        return successWrite
     }
 }

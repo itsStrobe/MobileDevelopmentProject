@@ -61,29 +61,19 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     // MARK: - protocolManageMaterial methods
     
     func addMaterial(material: Note, listImages: [UIImage]) {
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
-        var cont: Int = CoreDataUtilities.getNextImageId()
+        var imageId: Int = CoreDataUtilities.getNextImageId()
         
         material.isTheory = self.isTheory
         currentCourse.addToHasNote(material)
         
         for image in listImages {
-            let path = documentDirectory.appendingPathComponent(String(cont))
-            var successWrite: Bool = false
-            
-            if let imageAsData = UIImagePNGRepresentation(image) {
-                successWrite = NSData(data: imageAsData).write(toFile: path, atomically: true)
-            } else if let imageAsData = UIImageJPEGRepresentation(image, 1.0){
-                successWrite = NSData(data: imageAsData).write(toFile: path, atomically: true)
-            }
-            
-            if successWrite {
+            if CoreDataUtilities.saveToDocumentDirectory(image: image, id: imageId) {
                 let imageAsCoreData = Image(context: PersistenceService.context)
-                imageAsCoreData.id = Int32(cont)
+                imageAsCoreData.id = Int32(imageId)
                 material.addToHasImage(imageAsCoreData)
-                cont = cont + 1
+                imageId = imageId + 1
             } else {
-                print("Could not save image #", cont)
+                print("Could not save image #", imageId)
             }
         }
         
