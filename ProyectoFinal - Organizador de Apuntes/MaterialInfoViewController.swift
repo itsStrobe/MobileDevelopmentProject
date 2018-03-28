@@ -12,7 +12,6 @@ import CoreData
 protocol protocolManageMaterial {
     func addMaterial(material: Note, listImages: [UIImage])
     func delMaterial(material: Note)
-    func getNextImageId() -> Int
 }
 
 class MaterialInfoViewController: UIViewController {

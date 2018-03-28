@@ -16,6 +16,8 @@ class NoteContentViewController: UIViewController {
     
     var isNewNote: Bool!
     var listImages: [UIImage]!
+    var listImagesId: [Int]!
+    var nextImageId: Int!
     var currentCourse: Course!
     var currentNote: Note!
     var materialView: protocolManageMaterial!
@@ -23,6 +25,8 @@ class NoteContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         listImages = [UIImage]()
+        listImagesId = [Int]()
+        nextImageId = CoreDataUtilities.getNextImageId()
         
         if !isNewNote {
             tvNoteText.text = currentNote.text
@@ -56,6 +60,7 @@ class NoteContentViewController: UIViewController {
         for imageCoreData in listImagesCoreData {
             let imageURL = URL(fileURLWithPath: documentDirectory).appendingPathComponent(String(imageCoreData.id))
             listImages.append(UIImage(contentsOfFile: imageURL.path)!)
+            listImagesId.append(Int(imageCoreData.id))
         }
     }
 
@@ -96,7 +101,9 @@ extension NoteContentViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage]! as! UIImage
         listImages.append(image)
+        listImagesId.append(nextImageId)
         tableView.reloadData()
+        nextImageId = nextImageId + 1
         dismiss(animated: true, completion: nil)
     }
 }
@@ -110,10 +117,10 @@ extension NoteContentViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellImage") as! UITableViewCell
-        cell.imageView?.image = listImages[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellImage") as! ImageTableViewCell
+        cell.imgView.image = listImages[indexPath.row]
+        cell.imgName.text = "Imagen \(listImagesId[indexPath.row])"
         return cell
     }
-    
     
 }

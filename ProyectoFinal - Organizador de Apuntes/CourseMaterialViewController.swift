@@ -62,7 +62,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     
     func addMaterial(material: Note, listImages: [UIImage]) {
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
-        var cont: Int = getNextImageId()
+        var cont: Int = CoreDataUtilities.getNextImageId()
         
         material.isTheory = self.isTheory
         currentCourse.addToHasNote(material)
@@ -97,23 +97,6 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         listNotes.remove(at: lastSelectedCell)
         self.tableView.reloadData()
         PersistenceService.saveContext()
-    }
-    
-    func getNextImageId() -> Int {
-        let imageRequest: NSFetchRequest<Image> = Image.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "id == max(id)")
-        imageRequest.fetchLimit = 1
-        imageRequest.predicate = predicate
-        do {
-            let data = try PersistenceService.context.fetch(imageRequest)
-            if data.count != 0 {
-                return Int(data[0].id) + 1
-            }
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve the max id of an image")
-        }
-        return 1
     }
 
     // MARK: - Navigation
