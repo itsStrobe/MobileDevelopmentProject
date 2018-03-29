@@ -12,6 +12,7 @@ class ImageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var imgName: UILabel!
+    @IBOutlet weak var btDelete: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

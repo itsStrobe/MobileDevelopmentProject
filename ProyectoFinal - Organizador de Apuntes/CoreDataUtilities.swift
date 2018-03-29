@@ -42,4 +42,14 @@ class CoreDataUtilities: NSObject {
         
         return successWrite
     }
+    
+    static func deleteImageFromDocumentDirectory(id: Int) {
+        let fileManager = FileManager.default
+        let path = documentDirectory.appendingPathComponent(String(id))
+        do {
+            try fileManager.removeItem(atPath: path)
+        } catch {
+            print("Could not delete image #\(id) from document directory.")
+        }
+    }
 }

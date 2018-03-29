@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -240,7 +241,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDJ-6a-Ya4">
-                                <rect key="frame" x="54" y="371" width="268" height="100"/>
+                                <rect key="frame" x="54" y="371" width="268" height="129"/>
                                 <color key="backgroundColor" red="0.50858564549999996" green="0.82745098039999998" blue="0.81570706479999999" alpha="0.51813998289999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="5CR-b9-z9N"/>
@@ -448,16 +449,28 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Qb-3i-737">
+                                                    <rect key="frame" x="260.5" y="21.5" width="55" height="30"/>
+                                                    <state key="normal" title="Eliminar">
+                                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="eliminatePhoto:" destination="w69-40-xi6" eventType="touchUpInside" id="prD-9L-b80"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="lO5-7d-pjH" secondAttribute="bottom" id="0xu-yT-1yJ"/>
+                                                <constraint firstItem="3Qb-3i-737" firstAttribute="centerY" secondItem="Hmm-QC-hE3" secondAttribute="centerY" id="Fk7-YS-HQ7"/>
                                                 <constraint firstItem="lO5-7d-pjH" firstAttribute="leading" secondItem="Hmm-QC-hE3" secondAttribute="leading" id="Hx8-xG-uwL"/>
                                                 <constraint firstItem="Ei1-9r-wDc" firstAttribute="leading" secondItem="lO5-7d-pjH" secondAttribute="trailing" constant="12.5" id="KnK-ld-gl1"/>
                                                 <constraint firstItem="Ei1-9r-wDc" firstAttribute="centerY" secondItem="Hmm-QC-hE3" secondAttribute="centerY" id="YAR-ad-fsA"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3Qb-3i-737" secondAttribute="trailing" constant="12.5" id="omv-le-rPo"/>
                                                 <constraint firstItem="lO5-7d-pjH" firstAttribute="top" secondItem="Hmm-QC-hE3" secondAttribute="top" id="vV7-bB-jiX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btDelete" destination="3Qb-3i-737" id="zGH-b3-dTS"/>
                                             <outlet property="imageView" destination="lO5-7d-pjH" id="2sk-Oh-9X0"/>
                                             <outlet property="imgName" destination="Ei1-9r-wDc" id="UuL-Es-Ybi"/>
                                             <outlet property="imgView" destination="lO5-7d-pjH" id="7xj-Fk-DLN"/>
@@ -665,7 +678,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KLl-vS-RZA"/>
+        <segue reference="1bV-OY-Vc2"/>
         <segue reference="DwF-K3-Mzj"/>
         <segue reference="29D-en-Qb4"/>
         <segue reference="C5s-5c-OTV"/>

@@ -21,6 +21,8 @@ class NoteContentViewController: UIViewController {
     var originalImagesCount: Int!
     var listImages: [UIImage]!
     var listImagesId: [Int]!
+    var listImagesCoreData : [Image]!
+    var listImagesCoreDataToDelete: [Image]!
     var nextImageId: Int!
     var currentCourse: Course!
     var currentNote: Note!
@@ -30,6 +32,7 @@ class NoteContentViewController: UIViewController {
         super.viewDidLoad()
         listImages = [UIImage]()
         listImagesId = [Int]()
+        listImagesCoreDataToDelete = [Image]()
         nextImageId = CoreDataUtilities.getNextImageId()
         
         if !isNewNote {
@@ -52,7 +55,6 @@ class NoteContentViewController: UIViewController {
     }
     
     func loadImages() {
-        var listImagesCoreData : [Image]
         let imagesRequest: NSFetchRequest<Image> = Image.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "belongsTo.name == %@", currentNote.name!)
         imagesRequest.predicate = predicate
@@ -89,6 +91,14 @@ class NoteContentViewController: UIViewController {
         }
         PersistenceService.saveContext()
     }
+    
+    func deleteUndesiredImages() {
+        for imageCoreData in listImagesCoreDataToDelete {
+            CoreDataUtilities.deleteImageFromDocumentDirectory(id: Int(imageCoreData.id))
+            PersistenceService.context.delete(imageCoreData)
+        }
+        PersistenceService.saveContext()
+    }
 
     @IBAction func openPhotoLibrary(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -98,6 +108,29 @@ class NoteContentViewController: UIViewController {
             imagePicker.allowsEditing = false
             present(imagePicker, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func eliminatePhoto(_ sender: UIButton) {
+        let view = sender.superview!
+        let cell = view.superview! as! ImageTableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        
+        if indexPath.row < originalImagesCount {
+            // This executes when the image to be deleted is part of the images that
+            // were already attached to the currentNote.
+            listImagesCoreDataToDelete.append(listImagesCoreData[indexPath.row])
+            listImagesCoreData.remove(at: indexPath.row)
+            originalImagesCount = originalImagesCount - 1
+        } else {
+            // This executes when the image to be deleted is one that was not part of the
+            // images that were already attached to the currentNote (it was just recently
+            // added in this view).
+            nextImageId = nextImageId - 1
+        }
+        
+        listImages.remove(at: indexPath.row)
+        listImagesId.remove(at: indexPath.row)
+        tableView.reloadData()
     }
     
     // MARK: - Navigation
@@ -112,11 +145,21 @@ class NoteContentViewController: UIViewController {
             btNewPhoto.isEnabled = true
             btPhotoLibrary.isEnabled = true
             tvNoteText.isEditable = true
+            tableView.reloadData()
             return false
         }
         
-        saveNewImages()
-        navigationController?.popViewController(animated: true)
+        let confirmationAlert = UIAlertController(title: "¿Estás seguro de que deseas guardar los cambios?", message: "El texto y las fotos iniciales (en caso de haberse borrado) no podrán recuperarse. Deberás registrarlas nuevamente.", preferredStyle: .alert)
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Confirmar", style: .default, handler: { (action: UIAlertAction!) in
+            self.saveNewImages()
+            self.deleteUndesiredImages()
+            self.navigationController?.popViewController(animated: true)
+        }))
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        present(confirmationAlert, animated: true, completion: nil)
         return false
     }
 
@@ -156,6 +199,15 @@ extension NoteContentViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellImage") as! ImageTableViewCell
         cell.imgView.image = listImages[indexPath.row]
         cell.imgName.text = "Imagen \(listImagesId[indexPath.row])"
+        
+        print(btSaveEdit.currentTitle!)
+        
+        if btSaveEdit.currentTitle! == "Editar" {
+            cell.btDelete.isHidden = true
+        } else {
+            cell.btDelete.isHidden = false
+        }
+        
         return cell
     }
     
