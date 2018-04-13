@@ -170,6 +170,7 @@ class NoteContentViewController: UIViewController {
         viewMaterialInfo.materialView = self.materialView
         viewMaterialInfo.isNewNote = self.isNewNote
         viewMaterialInfo.listImages = self.listImages
+        viewMaterialInfo.materialType = 0
     }
 }
 

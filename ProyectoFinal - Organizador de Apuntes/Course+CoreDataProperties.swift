@@ -2,7 +2,7 @@
 //  Course+CoreDataProperties.swift
 //  ProyectoFinal - Organizador de Apuntes
 //
-//  Created by Angel Seiji Morimoto Burgos on 3/27/18.
+//  Created by Alumno on 4/10/18.
 //  Copyright © 2018 itesm. All rights reserved.
 //
 //
@@ -23,6 +23,8 @@ extension Course {
     @NSManaged public var professor: String?
     @NSManaged public var tutoring: String?
     @NSManaged public var hasNote: NSSet?
+    @NSManaged public var hasVideoLink: NSSet?
+    @NSManaged public var hasDocument: NSSet?
 
 }
 
@@ -40,5 +42,39 @@ extension Course {
 
     @objc(removeHasNote:)
     @NSManaged public func removeFromHasNote(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for hasVideoLink
+extension Course {
+
+    @objc(addHasVideoLinkObject:)
+    @NSManaged public func addToHasVideoLink(_ value: VideoLink)
+
+    @objc(removeHasVideoLinkObject:)
+    @NSManaged public func removeFromHasVideoLink(_ value: VideoLink)
+
+    @objc(addHasVideoLink:)
+    @NSManaged public func addToHasVideoLink(_ values: NSSet)
+
+    @objc(removeHasVideoLink:)
+    @NSManaged public func removeFromHasVideoLink(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for hasDocument
+extension Course {
+
+    @objc(addHasDocumentObject:)
+    @NSManaged public func addToHasDocument(_ value: Document)
+
+    @objc(removeHasDocumentObject:)
+    @NSManaged public func removeFromHasDocument(_ value: Document)
+
+    @objc(addHasDocument:)
+    @NSManaged public func addToHasDocument(_ values: NSSet)
+
+    @objc(removeHasDocument:)
+    @NSManaged public func removeFromHasDocument(_ values: NSSet)
 
 }
