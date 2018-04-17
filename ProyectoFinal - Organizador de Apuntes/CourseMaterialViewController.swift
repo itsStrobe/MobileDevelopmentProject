@@ -21,9 +21,56 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     var listVideoLinks = [VideoLink]()
     var listDocuments = [Document]()
     
+    @IBOutlet weak var tfTema: UITextField!
+    @IBOutlet weak var tfParcial: UITextField!
+    @IBOutlet weak var segCtrlSortType: UISegmentedControl!
+    @IBOutlet weak var segCtrlAsc: UISegmentedControl!
+    
     func loadNotes() {
         let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@", NSNumber(value: isTheory), currentCourse.name!)
+        notesRequest.predicate = predicate
+        
+        do {
+            listNotes = try PersistenceService.context.fetch(notesRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
+    func loadNotesTema(tema : String) {
+        let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@", NSNumber(value: isTheory), currentCourse.name!, tema)
+        notesRequest.predicate = predicate
+        
+        do {
+            listNotes = try PersistenceService.context.fetch(notesRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
+    func loadNotesPartial(partial : String) {
+        let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, partial)
+        notesRequest.predicate = predicate
+        
+        do {
+            listNotes = try PersistenceService.context.fetch(notesRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
+    func loadNotesTemaPartial(tema : String, partial : String) {
+        let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, tema, partial)
         notesRequest.predicate = predicate
         
         do {
@@ -49,9 +96,93 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    func loadVideoLinksTema(tema : String) {
+        let videoLinksRequest: NSFetchRequest<VideoLink> = VideoLink.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@", NSNumber(value: isTheory), currentCourse.name!, tema)
+        videoLinksRequest.predicate = predicate
+        
+        do {
+            listVideoLinks = try PersistenceService.context.fetch(videoLinksRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
+    func loadVideoLinksPartial(partial : String) {
+        let videoLinksRequest: NSFetchRequest<VideoLink> = VideoLink.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, partial)
+        videoLinksRequest.predicate = predicate
+        
+        do {
+            listVideoLinks = try PersistenceService.context.fetch(videoLinksRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
+    func loadVideoLinksTemaPartial(tema : String, partial : String) {
+        let videoLinksRequest: NSFetchRequest<VideoLink> = VideoLink.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, tema, partial)
+        videoLinksRequest.predicate = predicate
+        
+        do {
+            listVideoLinks = try PersistenceService.context.fetch(videoLinksRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
     func loadDocuments() {
         let documentsRequest: NSFetchRequest<Document> = Document.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@", NSNumber(value: isTheory), currentCourse.name!)
+        documentsRequest.predicate = predicate
+        
+        do {
+            listDocuments = try PersistenceService.context.fetch(documentsRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
+    func loadDocumentsTema(tema : String) {
+        let documentsRequest: NSFetchRequest<Document> = Document.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@", NSNumber(value: isTheory), currentCourse.name!, tema)
+        documentsRequest.predicate = predicate
+        
+        do {
+            listDocuments = try PersistenceService.context.fetch(documentsRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
+    func loadDocumentsPartial(partial : String) {
+        let documentsRequest: NSFetchRequest<Document> = Document.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, partial)
+        documentsRequest.predicate = predicate
+        
+        do {
+            listDocuments = try PersistenceService.context.fetch(documentsRequest)
+            tableView.reloadData()
+        } catch {
+            // TODO: Update this to improve error handling
+            print("Could not retrieve data from notes")
+        }
+    }
+    
+    func loadDocumentsTemaPartial(tema : String, partial : String) {
+        let documentsRequest: NSFetchRequest<Document> = Document.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, tema, partial)
         documentsRequest.predicate = predicate
         
         do {
@@ -145,6 +276,187 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBAction func changeMaterialType(_ sender: UISegmentedControl) {
         loadMaterial(type: sender.selectedSegmentIndex)
+    }
+    
+    @IBAction func filterSearch(_ sender: UIButton) {
+        segCtrlSortType.selectedSegmentIndex = 0
+        segCtrlAsc.selectedSegmentIndex = 0
+        var hasTopic : Bool!
+        var hasPartial : Bool!
+        
+        var tema = "nil"
+        var parcial = "nil"
+        
+        if let valTema = tfTema.text {
+            hasTopic = true
+            tema = valTema
+        }
+        else {
+            hasTopic = false
+        }
+        
+        if let valParcial = tfParcial.text {
+            hasPartial = true
+            parcial = valParcial
+        }
+        else {
+            hasPartial = false
+        }
+        
+        switch materialType.selectedSegmentIndex {
+        case 0:
+            if hasTopic, !hasPartial {
+                loadNotesTema(tema: tema)
+            }
+            if !hasTopic, hasPartial {
+                loadNotesPartial(partial: parcial)
+            }
+            if hasTopic, hasPartial {
+                loadNotesTemaPartial(tema: tema, partial: parcial)
+            }
+        case 1:
+            if hasTopic, !hasPartial {
+                loadVideoLinksTema(tema: tema)
+            }
+            if !hasTopic, hasPartial {
+                loadVideoLinksPartial(partial: parcial)
+            }
+            if hasTopic, hasPartial {
+                loadVideoLinksTemaPartial(tema: tema, partial: parcial)
+            }
+        case 2:
+            if hasTopic, !hasPartial {
+                loadDocumentsTema(tema: tema)
+            }
+            if !hasTopic, hasPartial {
+                loadDocumentsPartial(partial: parcial)
+            }
+            if hasTopic, hasPartial {
+                loadDocumentsTemaPartial(tema: tema, partial: parcial)
+            }
+        default:
+            return
+        }
+        
+    }
+    
+    @IBAction func changeSortBy(_ sender: UISegmentedControl) {
+        switch materialType.selectedSegmentIndex {
+        case 0:
+            if sender.selectedSegmentIndex == 0 {
+                if segCtrlAsc.selectedSegmentIndex == 0 {
+                    listNotes = listNotes.sorted(by: { $0.name! < $1.name!})
+                }
+                else {
+                    listNotes = listNotes.sorted(by: {$0.name! > $1.name!})
+                }
+            }
+            else {
+                if segCtrlAsc.selectedSegmentIndex == 0 {
+                    listNotes = listNotes.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
+                }
+                else {
+                    listNotes = listNotes.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
+                }
+            }
+        case 1:
+            if sender.selectedSegmentIndex == 0 {
+                if segCtrlAsc.selectedSegmentIndex == 0 {
+                    listVideoLinks = listVideoLinks.sorted(by: { $0.name! < $1.name!})
+                }
+                else {
+                    listVideoLinks = listVideoLinks.sorted(by: {$0.name! > $1.name!})
+                }
+            }
+            else {
+                if segCtrlAsc.selectedSegmentIndex == 0 {
+                    listVideoLinks = listVideoLinks.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
+                }
+                else {
+                    listVideoLinks = listVideoLinks.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
+                }
+            }
+        case 2:
+            if sender.selectedSegmentIndex == 0 {
+                if segCtrlAsc.selectedSegmentIndex == 0 {
+                    listDocuments = listDocuments.sorted(by: { $0.name! < $1.name!})
+                }
+                else {
+                    listDocuments = listDocuments.sorted(by: {$0.name! > $1.name!})
+                }
+            }
+            else {
+                if segCtrlAsc.selectedSegmentIndex == 0 {
+                    listDocuments = listDocuments.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
+                }
+                else {
+                    listDocuments = listDocuments.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
+                }
+            }
+        default:
+            return
+        }
+        
+        tableView.reloadData()
+    }
+    @IBAction func changeSortAsc(_ sender: UISegmentedControl) {
+        switch materialType.selectedSegmentIndex {
+        case 0:
+            if segCtrlSortType.selectedSegmentIndex == 0 {
+                if sender.selectedSegmentIndex == 0 {
+                    listNotes = listNotes.sorted(by: { $0.name! < $1.name!})
+                }
+                else {
+                    listNotes = listNotes.sorted(by: {$0.name! > $1.name!})
+                }
+            }
+            else {
+                if sender.selectedSegmentIndex == 0 {
+                    listNotes = listNotes.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
+                }
+                else {
+                    listNotes = listNotes.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
+                }
+            }
+        case 1:
+            if segCtrlSortType.selectedSegmentIndex == 0 {
+                if sender.selectedSegmentIndex == 0 {
+                    listVideoLinks = listVideoLinks.sorted(by: { $0.name! < $1.name!})
+                }
+                else {
+                    listVideoLinks = listVideoLinks.sorted(by: {$0.name! > $1.name!})
+                }
+            }
+            else {
+                if sender.selectedSegmentIndex == 0 {
+                    listVideoLinks = listVideoLinks.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
+                }
+                else {
+                    listVideoLinks = listVideoLinks.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
+                }
+            }
+        case 2:
+            if segCtrlSortType.selectedSegmentIndex == 0 {
+                if sender.selectedSegmentIndex == 0 {
+                    listDocuments = listDocuments.sorted(by: { $0.name! < $1.name!})
+                }
+                else {
+                    listDocuments = listDocuments.sorted(by: {$0.name! > $1.name!})
+                }
+            }
+            else {
+                if sender.selectedSegmentIndex == 0 {
+                    listDocuments = listDocuments.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
+                }
+                else {
+                    listDocuments = listDocuments.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
+                }
+            }
+        default:
+            return
+        }
+        
+        tableView.reloadData()
     }
     
     // MARK: - tableViewDelegate and tableViewDataSource methods
