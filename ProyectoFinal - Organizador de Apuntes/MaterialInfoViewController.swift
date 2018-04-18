@@ -11,10 +11,11 @@ import CoreData
 
 protocol protocolManageMaterial {
     func addMaterial(material: Note, listImages: [UIImage])
-    func delMaterial(material: Note)
     func addMaterial(material: VideoLink)
     func addMaterial(material: Document)
-    //func delMaterial(material: VideoLink)
+    func delMaterial(material: Note)
+    func delMaterial(material: VideoLink)
+    func delMaterial(material: Document)
 }
 
 class MaterialInfoViewController: UIViewController {
@@ -208,6 +209,21 @@ class MaterialInfoViewController: UIViewController {
         return checkResult
     }
     
+    func deleteMaterial() {
+        switch materialType {
+        case 0:
+            materialView.delMaterial(material: currentNote)
+        case 1:
+            materialView.delMaterial(material: currentVideoLink)
+        case 2:
+            materialView.delMaterial(material: currentDocument)
+        default:
+            break
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - IBActions.
     
     @IBAction func saveMaterialInfo(_ sender: UIButton) {
         if let materialName = tfName.text, let materialTopic = tfTopic.text, let materialPartial = tfPartial.text, !materialName.isEmpty, !materialTopic.isEmpty, !materialPartial.isEmpty {
@@ -245,10 +261,16 @@ class MaterialInfoViewController: UIViewController {
         }
     }
     
-    @IBAction func deleteCourse(_ sender: UIButton) {
-        print(currentNote.name!)
-        materialView.delMaterial(material: currentNote)
-        navigationController?.popViewController(animated: true)
+    @IBAction func deleteMaterial(_ sender: UIButton) {
+        let confirmationAlert = UIAlertController(title: "¿Estás seguro de que deseas eliminar este material?", message: "El contenido almacenado será borrado de la aplicación y no podrá recuperarse. Deberás registrarlo nuevamente.", preferredStyle: .alert)
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Confirmar", style: .default, handler: { (action: UIAlertAction!) in
+            self.deleteMaterial()
+        }))
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        present(confirmationAlert, animated: true, completion: nil)
     }
     
     /*

@@ -209,7 +209,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     
     func openWebLink(link: String?, type: String?) {
         
-        if let link = link {
+        if let link = link, !link.isEmpty {
             // Check if link has http (or https) protocol.
             var urlLink : String
             
@@ -399,6 +399,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         
         tableView.reloadData()
     }
+    
     @IBAction func changeSortAsc(_ sender: UISegmentedControl) {
         switch materialType.selectedSegmentIndex {
         case 0:
@@ -535,8 +536,28 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func delMaterial(material: Note) {
+        if let images = material.hasImage {
+            for image in images {
+                CoreDataUtilities.deleteImageFromDocumentDirectory(id: Int((image as! Image).id))
+                PersistenceService.context.delete(image as! Image)
+            }
+        }
         PersistenceService.context.delete(material)
         listNotes.remove(at: lastSelectedCell)
+        self.tableView.reloadData()
+        PersistenceService.saveContext()
+    }
+    
+    func delMaterial(material: VideoLink) {
+        PersistenceService.context.delete(material)
+        listVideoLinks.remove(at: lastSelectedCell)
+        self.tableView.reloadData()
+        PersistenceService.saveContext()
+    }
+    
+    func delMaterial(material: Document) {
+        PersistenceService.context.delete(material)
+        listDocuments.remove(at: lastSelectedCell)
         self.tableView.reloadData()
         PersistenceService.saveContext()
     }

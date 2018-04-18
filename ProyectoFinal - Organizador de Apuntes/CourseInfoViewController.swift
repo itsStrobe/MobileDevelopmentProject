@@ -12,6 +12,7 @@ import CoreData
 protocol protocolManageCourses {
     func addCourse(course: Course)
     func delCourse(course: Course)
+    func editCourse(course: Course)
 }
 
 class CourseInfoViewController: UIViewController {
@@ -66,21 +67,39 @@ class CourseInfoViewController: UIViewController {
         }
     }
     
+    func updateCourseValues(course: Course, name: String) {
+        course.name = name
+        course.professor = lbProfessorName.text
+        course.email = lbEmail.text
+        course.office = lbOffice.text
+        course.tutoring = lbTutoring.text
+    }
+    
+    func createCourse(name: String) {
+        if !isCourseRegistered(courseName: name) {
+            let course = Course(context: PersistenceService.context)
+            updateCourseValues(course: course, name: name)
+            courseView.addCourse(course: course)
+            navigationController?.popViewController(animated: true)
+        } else {
+            let alert = UIAlertController(title: "Curso ya registrado", message: "El curso '\(name)' ya existe. Por favor utilice otro nombre.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func editCourse(name: String) {
+        updateCourseValues(course: currentCourse, name: name)
+        courseView.editCourse(course: currentCourse)
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func saveCourse(_ sender: UIButton) {
         if let name = lbCourseName.text , !name.isEmpty {
-            if !isCourseRegistered(courseName: name) {
-                let course = Course(context: PersistenceService.context)
-                course.name = name
-                course.professor = lbProfessorName.text
-                course.email = lbEmail.text
-                course.office = lbOffice.text
-                course.tutoring = lbTutoring.text
-                courseView.addCourse(course: course)
-                navigationController?.popViewController(animated: true)
+            if isNew {
+                createCourse(name: name)
             } else {
-                let alert = UIAlertController(title: "Curso ya registrado", message: "El curso '\(name)' ya existe. Por favor utilice otro nombre.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                present(alert, animated: true, completion: nil)
+                editCourse(name: name)
             }
         } else {
             let alert = UIAlertController(title: "Faltan datos", message: "El campo nombre es obligatorio.", preferredStyle: .alert)
@@ -101,6 +120,7 @@ class CourseInfoViewController: UIViewController {
         
         present(deleteAlert, animated: true, completion: nil)
     }
+    
     /*
     // MARK: - Navigation
 

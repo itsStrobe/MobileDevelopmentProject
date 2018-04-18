@@ -34,8 +34,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - UITableViewDelegate and UITableViewDataSource methods.
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listCourses.count
@@ -51,6 +52,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return CGFloat(50)
     }
     
+    
+    // MARK: - protocolManageCourses methods.
+    
     func addCourse(course: Course) {
         PersistenceService.saveContext()
         self.listCourses.append(course)
@@ -58,9 +62,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func delCourse(course: Course) {
+        // Check if the course has notes.
         if let courseNotes = course.hasNote?.allObjects {
+            // Iterate over each note.
             for note in courseNotes {
+                // Check if the note has images attached to it.
+                if let noteImages = (note as! Note).hasImage?.allObjects {
+                    // Iterate over the images attached to the note and delete them.
+                    for image in noteImages {
+                        CoreDataUtilities.deleteImageFromDocumentDirectory(id:  Int((image as! Image).id))
+                        PersistenceService.context.delete(image as! NSManagedObject)
+                    }
+                }
+                // Delete the note.
                 PersistenceService.context.delete(note as! NSManagedObject)
+            }
+        }
+        
+        // Check if the course has video links.
+        if let courseVideoLinks = course.hasVideoLink?.allObjects {
+            // Iterate over the video links and delete them.
+            for videoLink in courseVideoLinks {
+                PersistenceService.context.delete(videoLink as! NSManagedObject)
+            }
+        }
+        
+        // Check if the course has documents.
+        if let courseDocuments = course.hasDocument?.allObjects {
+            // Iterate over the documents and delete them.
+            for document in courseDocuments {
+                PersistenceService.context.delete(document as! NSManagedObject)
             }
         }
         
@@ -68,6 +99,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         PersistenceService.saveContext()
         listCourses.remove(at: lastSelectedCell)
         self.tableView.reloadData()
+    }
+    
+    func editCourse(course: Course) {
+        PersistenceService.saveContext()
     }
 
      // MARK: - Navigation

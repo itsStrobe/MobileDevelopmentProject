@@ -136,41 +136,52 @@ class NoteContentViewController: UIViewController {
     // MARK: - Navigation
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if isNewNote {
-            return true
-        }
-        
-        if btSaveEdit.currentTitle == "Editar" {
-            btSaveEdit.setTitle("Guardar", for: .normal)
-            btNewPhoto.isEnabled = true
-            btPhotoLibrary.isEnabled = true
-            tvNoteText.isEditable = true
-            tableView.reloadData()
+        if identifier == "saveNote" {
+            if isNewNote {
+                return true
+            }
+            
+            if btSaveEdit.currentTitle == "Editar" {
+                btSaveEdit.setTitle("Guardar", for: .normal)
+                btNewPhoto.isEnabled = true
+                btPhotoLibrary.isEnabled = true
+                tvNoteText.isEditable = true
+                tableView.reloadData()
+                return false
+            }
+            
+            let confirmationAlert = UIAlertController(title: "¿Estás seguro de que deseas guardar los cambios?", message: "El texto y las fotos iniciales (en caso de haberse borrado) no podrán recuperarse. Deberás registrarlas nuevamente.", preferredStyle: .alert)
+            
+            confirmationAlert.addAction(UIAlertAction(title: "Confirmar", style: .default, handler: { (action: UIAlertAction!) in
+                self.saveNewImages()
+                self.deleteUndesiredImages()
+                self.navigationController?.popViewController(animated: true)
+            }))
+            
+            confirmationAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+            
+            present(confirmationAlert, animated: true, completion: nil)
             return false
         }
         
-        let confirmationAlert = UIAlertController(title: "¿Estás seguro de que deseas guardar los cambios?", message: "El texto y las fotos iniciales (en caso de haberse borrado) no podrán recuperarse. Deberás registrarlas nuevamente.", preferredStyle: .alert)
-        
-        confirmationAlert.addAction(UIAlertAction(title: "Confirmar", style: .default, handler: { (action: UIAlertAction!) in
-            self.saveNewImages()
-            self.deleteUndesiredImages()
-            self.navigationController?.popViewController(animated: true)
-        }))
-        
-        confirmationAlert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-        
-        present(confirmationAlert, animated: true, completion: nil)
-        return false
+        // This handles the segue with identifier "ImageViewer"
+        return true
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let viewMaterialInfo = segue.destination as! MaterialInfoViewController
-        viewMaterialInfo.noteText = tvNoteText.text
-        viewMaterialInfo.currentCourse = self.currentCourse
-        viewMaterialInfo.materialView = self.materialView
-        viewMaterialInfo.isNewNote = self.isNewNote
-        viewMaterialInfo.listImages = self.listImages
-        viewMaterialInfo.materialType = 0
+        if segue.identifier == "saveNote" {
+            let viewMaterialInfo = segue.destination as! MaterialInfoViewController
+            viewMaterialInfo.noteText = tvNoteText.text
+            viewMaterialInfo.currentCourse = self.currentCourse
+            viewMaterialInfo.materialView = self.materialView
+            viewMaterialInfo.isNewNote = self.isNewNote
+            viewMaterialInfo.listImages = self.listImages
+            viewMaterialInfo.materialType = 0
+        } else if segue.identifier == "ImageViewer" {
+            let viewImageViewer = segue.destination as! ImageViewerController
+            let indexPath = tableView.indexPathForSelectedRow!
+            viewImageViewer.image = listImages[indexPath.row]
+        }
     }
 }
 
