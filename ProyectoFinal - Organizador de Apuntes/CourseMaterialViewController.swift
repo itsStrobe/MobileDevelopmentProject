@@ -18,6 +18,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     var lastSelectedCell : Int!
     var currentCourse : Course!
     var listNotes = [Note]()
+    var listNotesToDisplay = [Note]()
     var listVideoLinks = [VideoLink]()
     var listDocuments = [Document]()
     
@@ -26,6 +27,12 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var segCtrlSortType: UISegmentedControl!
     @IBOutlet weak var segCtrlAsc: UISegmentedControl!
     
+    func displayAllNotes() {
+        for note in listNotes {
+            listNotesToDisplay.append(note)
+        }
+    }
+    
     func loadNotes() {
         let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@", NSNumber(value: isTheory), currentCourse.name!)
@@ -33,48 +40,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         
         do {
             listNotes = try PersistenceService.context.fetch(notesRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
-        }
-    }
-    
-    func loadNotesTema(tema : String) {
-        let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@", NSNumber(value: isTheory), currentCourse.name!, tema)
-        notesRequest.predicate = predicate
-        
-        do {
-            listNotes = try PersistenceService.context.fetch(notesRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
-        }
-    }
-    
-    func loadNotesPartial(partial : String) {
-        let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, partial)
-        notesRequest.predicate = predicate
-        
-        do {
-            listNotes = try PersistenceService.context.fetch(notesRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
-        }
-    }
-    
-    func loadNotesTemaPartial(tema : String, partial : String) {
-        let notesRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, tema, partial)
-        notesRequest.predicate = predicate
-        
-        do {
-            listNotes = try PersistenceService.context.fetch(notesRequest)
+            displayAllNotes()
             tableView.reloadData()
         } catch {
             // TODO: Update this to improve error handling
@@ -85,48 +51,6 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     func loadVideoLinks() {
         let videoLinksRequest: NSFetchRequest<VideoLink> = VideoLink.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@", NSNumber(value: isTheory), currentCourse.name!)
-        videoLinksRequest.predicate = predicate
-        
-        do {
-            listVideoLinks = try PersistenceService.context.fetch(videoLinksRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
-        }
-    }
-    
-    func loadVideoLinksTema(tema : String) {
-        let videoLinksRequest: NSFetchRequest<VideoLink> = VideoLink.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@", NSNumber(value: isTheory), currentCourse.name!, tema)
-        videoLinksRequest.predicate = predicate
-        
-        do {
-            listVideoLinks = try PersistenceService.context.fetch(videoLinksRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
-        }
-    }
-    
-    func loadVideoLinksPartial(partial : String) {
-        let videoLinksRequest: NSFetchRequest<VideoLink> = VideoLink.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, partial)
-        videoLinksRequest.predicate = predicate
-        
-        do {
-            listVideoLinks = try PersistenceService.context.fetch(videoLinksRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
-        }
-    }
-    
-    func loadVideoLinksTemaPartial(tema : String, partial : String) {
-        let videoLinksRequest: NSFetchRequest<VideoLink> = VideoLink.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, tema, partial)
         videoLinksRequest.predicate = predicate
         
         do {
@@ -152,45 +76,23 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func loadDocumentsTema(tema : String) {
-        let documentsRequest: NSFetchRequest<Document> = Document.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@", NSNumber(value: isTheory), currentCourse.name!, tema)
-        documentsRequest.predicate = predicate
+    func filterNotes(partial : Int?, tema: String?){
+        listNotesToDisplay.removeAll()
         
-        do {
-            listDocuments = try PersistenceService.context.fetch(documentsRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
-        }
-    }
-    
-    func loadDocumentsPartial(partial : String) {
-        let documentsRequest: NSFetchRequest<Document> = Document.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, partial)
-        documentsRequest.predicate = predicate
-        
-        do {
-            listDocuments = try PersistenceService.context.fetch(documentsRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
-        }
-    }
-    
-    func loadDocumentsTemaPartial(tema : String, partial : String) {
-        let documentsRequest: NSFetchRequest<Document> = Document.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "isTheory == %@ AND belongsTo.name == %@ AND topic == %@ AND partial == %@", NSNumber(value: isTheory), currentCourse.name!, tema, partial)
-        documentsRequest.predicate = predicate
-        
-        do {
-            listDocuments = try PersistenceService.context.fetch(documentsRequest)
-            tableView.reloadData()
-        } catch {
-            // TODO: Update this to improve error handling
-            print("Could not retrieve data from notes")
+        if partial == nil && tema == nil {
+            displayAllNotes()
+        } else if partial == nil {
+            for note in listNotes {
+                if note.topic == tema {
+                    listNotesToDisplay.append(note)
+                }
+            }
+        } else {
+            for note in listNotes {
+                if note.topic == tema && Int(note.partial) == partial {
+                    listNotesToDisplay.append(note)
+                }
+            }
         }
     }
     
@@ -281,63 +183,41 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func filterSearch(_ sender: UIButton) {
         segCtrlSortType.selectedSegmentIndex = 0
         segCtrlAsc.selectedSegmentIndex = 0
-        var hasTopic : Bool!
-        var hasPartial : Bool!
         
-        var tema = "nil"
-        var parcial = "nil"
+        var partial : Int?
+        var tema: String?
         
-        if let valTema = tfTema.text {
-            hasTopic = true
-            tema = valTema
-        }
-        else {
-            hasTopic = false
+        if tfParcial.text == nil || tfParcial.text!.trimmingCharacters(in: CharacterSet(charactersIn: " ")).count == 0 {
+            partial = nil
+        } else {
+            if let partialInt = Int(tfParcial.text!) {
+                partial = partialInt
+            } else {
+                let alert = UIAlertController(title: "Dato inválido", message: "El campo de 'Parcial' debe ser numérico", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                present(alert, animated: true, completion: nil)
+                return
+            }
         }
         
-        if let valParcial = tfParcial.text {
-            hasPartial = true
-            parcial = valParcial
-        }
-        else {
-            hasPartial = false
+        if tfTema.text == nil || tfParcial.text!.trimmingCharacters(in: CharacterSet(charactersIn: " ")).count == 0 {
+            tema = nil
+        } else {
+            tema = tfTema.text
         }
         
         switch materialType.selectedSegmentIndex {
         case 0:
-            if hasTopic, !hasPartial {
-                loadNotesTema(tema: tema)
-            }
-            if !hasTopic, hasPartial {
-                loadNotesPartial(partial: parcial)
-            }
-            if hasTopic, hasPartial {
-                loadNotesTemaPartial(tema: tema, partial: parcial)
-            }
+            filterNotes(partial: partial, tema: tema)
         case 1:
-            if hasTopic, !hasPartial {
-                loadVideoLinksTema(tema: tema)
-            }
-            if !hasTopic, hasPartial {
-                loadVideoLinksPartial(partial: parcial)
-            }
-            if hasTopic, hasPartial {
-                loadVideoLinksTemaPartial(tema: tema, partial: parcial)
-            }
+            break
         case 2:
-            if hasTopic, !hasPartial {
-                loadDocumentsTema(tema: tema)
-            }
-            if !hasTopic, hasPartial {
-                loadDocumentsPartial(partial: parcial)
-            }
-            if hasTopic, hasPartial {
-                loadDocumentsTemaPartial(tema: tema, partial: parcial)
-            }
+            break
         default:
-            return
+            break
         }
         
+        tableView.reloadData()
     }
     
     @IBAction func changeSortBy(_ sender: UISegmentedControl) {
@@ -466,7 +346,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         
         switch materialType.selectedSegmentIndex {
         case 0:
-            return listNotes.count
+            return listNotesToDisplay.count
         case 1:
             return listVideoLinks.count
         case 2:
@@ -480,7 +360,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         let celda = tableView.dequeueReusableCell(withIdentifier: "cellMaterial") as! MaterialTableViewCell
         switch materialType.selectedSegmentIndex {
         case 0:
-            celda.lbName.text = listNotes[indexPath.row].name
+            celda.lbName.text = listNotesToDisplay[indexPath.row].name
         case 1:
             celda.lbName.text = listVideoLinks[indexPath.row].name
         case 2:
@@ -515,6 +395,8 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         listNotes.append(material)
+        listNotesToDisplay.removeAll()
+        displayAllNotes()
         PersistenceService.saveContext()
         tableView.reloadData()
     }
@@ -543,7 +425,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         PersistenceService.context.delete(material)
-        listNotes.remove(at: lastSelectedCell)
+        listNotesToDisplay.remove(at: lastSelectedCell)
         self.tableView.reloadData()
         PersistenceService.saveContext()
     }
@@ -591,7 +473,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             let indexPath = tableView.indexPathForSelectedRow!
             viewNoteContent.materialView = self
             viewNoteContent.currentCourse = self.currentCourse
-            viewNoteContent.currentNote = listNotes[indexPath.row]
+            viewNoteContent.currentNote = listNotesToDisplay[indexPath.row]
             viewNoteContent.isNewNote = false
         } else if segue.identifier == "newNote" {
             let viewNoteContent = segue.destination as! NoteContentViewController
@@ -618,7 +500,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             viewMaterialInfo.materialType = materialType.selectedSegmentIndex
             switch viewMaterialInfo.materialType {
             case 0:
-                viewMaterialInfo.currentNote = listNotes[lastSelectedCell]
+                viewMaterialInfo.currentNote = listNotesToDisplay[lastSelectedCell]
                 viewMaterialInfo.isNewNote = false
             case 1:
                 viewMaterialInfo.currentVideoLink = listVideoLinks[lastSelectedCell]
