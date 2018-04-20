@@ -16,6 +16,7 @@ protocol protocolManageMaterial {
     func delMaterial(material: Note)
     func delMaterial(material: VideoLink)
     func delMaterial(material: Document)
+    func editMaterial()
 }
 
 class MaterialInfoViewController: UIViewController {
@@ -36,8 +37,8 @@ class MaterialInfoViewController: UIViewController {
     var isNewNote: Bool!
     var noteText: String!
     var listImages: [UIImage]!
-    var currentCourse: Course!
     var materialView: protocolManageMaterial!
+    var currentCourse: Course!
     var currentNote: Note!
     var currentVideoLink: VideoLink!
     var currentDocument: Document!
@@ -89,6 +90,9 @@ class MaterialInfoViewController: UIViewController {
         default:
             break
         }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -209,6 +213,53 @@ class MaterialInfoViewController: UIViewController {
         return checkResult
     }
     
+    func saveMaterialInfo(_ materialName: String, _ materialTopic: String, _ materialPartial: String) -> (isRegistered: Bool, courseName: String) {
+        var saveResult : (isRegistered: Bool, courseName: String) = (false, "")
+    
+        switch materialType {
+        case 0:
+            saveResult = saveNoteInfo(materialName, materialTopic, materialPartial)
+        case 1:
+            saveResult = saveVideoInfo(materialName, materialTopic, materialPartial)
+        case 2:
+            saveResult = saveDocumentInfo(materialName, materialTopic, materialPartial)
+        default:
+            break
+        }
+        
+        return saveResult
+    }
+    
+    func updateNoteInfo(_ materialName: String, _ materialTopic: String, _ materialPartial: String) {
+        let materialDate = datePicker.date
+        currentNote.name = materialName
+        currentNote.topic = materialTopic
+        currentNote.partial = Int16(materialPartial)!
+        currentNote.date = NSDate(timeInterval: 0, since: materialDate)
+    }
+    
+    func updateDocumentInfo(_ materialName: String, _ materialTopic: String, _ materialPartial: String) {
+        let materialDate = datePicker.date
+        currentDocument.name = materialName
+        currentDocument.topic = materialTopic
+        currentDocument.partial = Int16(materialPartial)!
+        currentDocument.date = NSDate(timeInterval: 0, since: materialDate)
+        if let materialLink = tfDocument.text {
+            currentDocument.link = materialLink
+        }
+    }
+    
+    func updateVideoLinkInfo(_ materialName: String, _ materialTopic: String, _ materialPartial: String) {
+        let materialDate = datePicker.date
+        currentVideoLink.name = materialName
+        currentVideoLink.topic = materialTopic
+        currentVideoLink.partial = Int16(materialPartial)!
+        currentVideoLink.date = NSDate(timeInterval: 0, since: materialDate)
+        if let materialLink = tfVideoLink.text {
+            currentVideoLink.link = materialLink
+        }
+    }
+    
     func deleteMaterial() {
         switch materialType {
         case 0:
@@ -225,22 +276,52 @@ class MaterialInfoViewController: UIViewController {
     
     // MARK: - IBActions.
     
+    @IBAction func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
     @IBAction func saveMaterialInfo(_ sender: UIButton) {
         if let materialName = tfName.text, let materialTopic = tfTopic.text, let materialPartial = tfPartial.text, !materialName.isEmpty, !materialTopic.isEmpty, !materialPartial.isEmpty {
             
             var saveResult : (isRegistered: Bool, courseName: String) = (false, "")
             
-            switch materialType {
-            case 0:
-                saveResult = saveNoteInfo(materialName, materialTopic, materialPartial)
-            case 1:
-                saveResult = saveVideoInfo(materialName, materialTopic, materialPartial)
-            case 2:
-                saveResult = saveDocumentInfo(materialName, materialTopic, materialPartial)
-            default:
-                break
+            if isNewNote || isNewDocument || isNewVideoLink {
+                saveResult = saveMaterialInfo(materialName, materialTopic, materialPartial)
+            } else {
+                switch materialType {
+                case 0:
+                    if currentNote.name != materialName {
+                        saveResult = checkIfNoteExists(noteName: materialName)
+                    }
+                case 1:
+                    if currentVideoLink.name != materialName {
+                        saveResult = checkIfVideoLinkExists(videoLinkName: materialName)
+                    }
+                case 2:
+                    if currentDocument.name != materialName {
+                        saveResult = checkIfDocumentExists(documentName: materialName)
+                    }
+                default:
+                    break
+                }
+                
+                if !saveResult.isRegistered {
+                    switch materialType {
+                    case 0:
+                        updateNoteInfo(materialName, materialTopic, materialPartial)
+                    case 1:
+                        updateVideoLinkInfo(materialName, materialTopic, materialPartial)
+                    case 2:
+                        updateDocumentInfo(materialName, materialTopic, materialPartial)
+                    default:
+                        break
+                    }
+                    
+                    materialView.editMaterial()
+                }
             }
             
+            // Check if the material was already registered...
             if !saveResult.isRegistered {
                 navigationController?.popToViewController(materialView as! CourseMaterialViewController, animated: true)
             } else {
@@ -250,11 +331,12 @@ class MaterialInfoViewController: UIViewController {
                 } else {
                     alert = UIAlertController(title: "Material ya registrado", message: "El material'\(materialName)' ya existe en el curso '\(saveResult.courseName)'. Por favor utilice otro nombre.", preferredStyle: .alert)
                 }
+                
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
             }
         } else {
-            let alert = UIAlertController(title: "Faltan datos", message: "Es necesario llenar todos los campos", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Faltan datos", message: "Es necesario los campos de 'Nombre', 'Tema' y 'Parcial'", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alert.addAction(action)
             present(alert, animated: true, completion: nil)

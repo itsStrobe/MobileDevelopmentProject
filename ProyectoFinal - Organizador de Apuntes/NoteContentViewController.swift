@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import QuickLook
 
 class NoteContentViewController: UIViewController {
 
@@ -24,6 +25,7 @@ class NoteContentViewController: UIViewController {
     var listImagesCoreData : [Image]!
     var listImagesCoreDataToDelete: [Image]!
     var nextImageId: Int!
+    var selectedImageId: Int!
     var currentCourse: Course!
     var currentNote: Note!
     var materialView: protocolManageMaterial!
@@ -48,6 +50,9 @@ class NoteContentViewController: UIViewController {
             self.title = "Nueva Nota"
             originalImagesCount = 0
         }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,10 +72,9 @@ class NoteContentViewController: UIViewController {
             return
         }
         
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as String
-        
         for imageCoreData in listImagesCoreData {
-            let imageURL = URL(fileURLWithPath: documentDirectory).appendingPathComponent(String(imageCoreData.id))
+            let imageURL = URL(fileURLWithPath: CoreDataUtilities.documentDirectory as String).appendingPathComponent(String(imageCoreData.id) + ".jpeg")
+            print ("FIRST URL ", imageURL)
             listImages.append(UIImage(contentsOfFile: imageURL.path)!)
             listImagesId.append(Int(imageCoreData.id))
         }
@@ -80,7 +84,7 @@ class NoteContentViewController: UIViewController {
         var imageId = CoreDataUtilities.getNextImageId()
         
         for index in originalImagesCount ..< listImages.count {
-            if CoreDataUtilities.saveToDocumentDirectory(image: listImages[index], id: imageId) {
+            if CoreDataUtilities.saveToDocumentDirectory(image: listImages[index], id: String(imageId) + ".jpeg") {
                 let imageAsCoreData = Image(context: PersistenceService.context)
                 imageAsCoreData.id = Int32(imageId)
                 currentNote.addToHasImage(imageAsCoreData)
@@ -99,12 +103,27 @@ class NoteContentViewController: UIViewController {
         }
         PersistenceService.saveContext()
     }
+    
+    @IBAction func hideKeyboard() {
+        view.endEditing(true)
+    }
 
     @IBAction func openPhotoLibrary(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = false
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func openCamera(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera
+            imagePicker.cameraDevice = .rear
             imagePicker.allowsEditing = false
             present(imagePicker, animated: true, completion: nil)
         }
@@ -133,6 +152,10 @@ class NoteContentViewController: UIViewController {
         tableView.reloadData()
     }
     
+    func updateNoteValues() {
+        currentNote.text = tvNoteText.text
+    }
+    
     // MARK: - Navigation
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -155,6 +178,8 @@ class NoteContentViewController: UIViewController {
             confirmationAlert.addAction(UIAlertAction(title: "Confirmar", style: .default, handler: { (action: UIAlertAction!) in
                 self.saveNewImages()
                 self.deleteUndesiredImages()
+                self.updateNoteValues()
+                self.materialView.editMaterial()
                 self.navigationController?.popViewController(animated: true)
             }))
             
@@ -175,6 +200,8 @@ class NoteContentViewController: UIViewController {
             viewMaterialInfo.currentCourse = self.currentCourse
             viewMaterialInfo.materialView = self.materialView
             viewMaterialInfo.isNewNote = self.isNewNote
+            viewMaterialInfo.isNewDocument = false
+            viewMaterialInfo.isNewVideoLink = false
             viewMaterialInfo.listImages = self.listImages
             viewMaterialInfo.materialType = 0
         } else if segue.identifier == "ImageViewer" {
@@ -199,7 +226,7 @@ extension NoteContentViewController: UIImagePickerControllerDelegate, UINavigati
     }
 }
 
-// MARK: UITableViewDelegate and UITableViewDataSource methods
+// MARK: - UITableViewDelegate and UITableViewDataSource methods
 
 extension NoteContentViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -223,4 +250,30 @@ extension NoteContentViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let preview = QLPreviewController()
+        preview.dataSource = self
+        preview.currentPreviewItemIndex = indexPath.row
+        self.present(preview, animated: true)
+    }
+    
+}
+
+// MARK: - QLPreviewControllerDataSource and QLPreviewControllerDelegate methods
+
+extension NoteContentViewController: QLPreviewControllerDataSource, QLPreviewControllerDelegate {
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return listImagesId.count
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let selectedImageId = listImagesId[index]
+        let imageURL = NSURL(fileURLWithPath: CoreDataUtilities.documentDirectory as String).appendingPathComponent(String(selectedImageId) + ".jpeg")
+        return imageURL! as QLPreviewItem
+    }
+    
+    func previewController(_ controller: QLPreviewController, shouldOpen url: URL, for item: QLPreviewItem) -> Bool {
+        return true
+    }
 }

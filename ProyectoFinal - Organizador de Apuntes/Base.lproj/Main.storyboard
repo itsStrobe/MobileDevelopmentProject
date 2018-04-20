@@ -26,7 +26,7 @@
                                 <color key="backgroundColor" red="0.7843137255" green="0.74509803919999995" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.7843137255" green="0.74509803919999995" blue="0.82745098039999998" alpha="0.51813998289999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCourse" rowHeight="42" id="eV7-k4-3By" customClass="CustomTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCourse" rowHeight="42" id="eV7-k4-3By" customClass="CustomTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="42"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eV7-k4-3By" id="c6w-qo-JxH">
@@ -367,7 +367,7 @@
                                                 <rect key="frame" x="55.5" y="0.0" width="232.5" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -384,7 +384,7 @@
                                 <rect key="frame" x="0.0" y="256" width="320" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellMaterial" id="dfH-Be-aEY" customClass="MaterialTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellMaterial" id="dfH-Be-aEY" customClass="MaterialTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dfH-Be-aEY" id="uag-Q0-fVW" customClass="MaterialTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
@@ -483,7 +483,7 @@
                                     <constraint firstAttribute="width" secondItem="IDd-Xr-Q41" secondAttribute="height" multiplier="160:93" id="I0v-rB-Qjl"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellImage" rowHeight="73" id="cgu-9G-dtT" customClass="ImageTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellImage" rowHeight="73" id="cgu-9G-dtT" customClass="ImageTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cgu-9G-dtT" id="Hmm-QC-hE3">
@@ -529,7 +529,6 @@
                                             <outlet property="imageView" destination="lO5-7d-pjH" id="2sk-Oh-9X0"/>
                                             <outlet property="imgName" destination="Ei1-9r-wDc" id="UuL-Es-Ybi"/>
                                             <outlet property="imgView" destination="lO5-7d-pjH" id="7xj-Fk-DLN"/>
-                                            <segue destination="wua-by-eCd" kind="show" identifier="ImageViewer" id="1FG-Le-ObO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -544,6 +543,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPB-PC-8CC">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
                                         <state key="normal" title="Nueva foto"/>
+                                        <connections>
+                                            <action selector="openCamera:" destination="w69-40-xi6" eventType="touchUpInside" id="TFc-KN-4Yx"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CR6-QG-nio">
                                         <rect key="frame" x="125" y="0.0" width="48" height="30"/>
@@ -607,7 +609,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.20000000000000001" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="nMF-of-Hww">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                                 <connections>
                                     <outlet property="delegate" destination="wua-by-eCd" id="Tim-6N-Seb"/>
                                 </connections>
@@ -706,7 +708,7 @@
                                                 <rect key="frame" x="95.5" y="0.0" width="224.5" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
                                     </stackView>

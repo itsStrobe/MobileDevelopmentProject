@@ -20,7 +20,9 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     var listNotes = [Note]()
     var listNotesToDisplay = [Note]()
     var listVideoLinks = [VideoLink]()
+    var listVideoLinksToDisplay = [VideoLink]()
     var listDocuments = [Document]()
+    var listDocumentsToDisplay = [Document]()
     
     @IBOutlet weak var tfTema: UITextField!
     @IBOutlet weak var tfParcial: UITextField!
@@ -30,6 +32,18 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     func displayAllNotes() {
         for note in listNotes {
             listNotesToDisplay.append(note)
+        }
+    }
+    
+    func displayAllVideoLinks() {
+        for videoLink in listVideoLinks {
+            listVideoLinksToDisplay.append(videoLink)
+        }
+    }
+    
+    func displayAllDocuments() {
+        for document in listDocuments {
+            listDocumentsToDisplay.append(document)
         }
     }
     
@@ -55,6 +69,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         
         do {
             listVideoLinks = try PersistenceService.context.fetch(videoLinksRequest)
+            displayAllVideoLinks()
             tableView.reloadData()
         } catch {
             // TODO: Update this to improve error handling
@@ -69,6 +84,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         
         do {
             listDocuments = try PersistenceService.context.fetch(documentsRequest)
+            displayAllDocuments()
             tableView.reloadData()
         } catch {
             // TODO: Update this to improve error handling
@@ -76,27 +92,13 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func filterNotes(partial : Int?, tema: String?){
-        listNotesToDisplay.removeAll()
-        
-        if partial == nil && tema == nil {
-            displayAllNotes()
-        } else if partial == nil {
-            for note in listNotes {
-                if note.topic == tema {
-                    listNotesToDisplay.append(note)
-                }
-            }
-        } else {
-            for note in listNotes {
-                if note.topic == tema && Int(note.partial) == partial {
-                    listNotesToDisplay.append(note)
-                }
-            }
-        }
-    }
+    
     
     func loadMaterial(type : Int) {
+        listNotesToDisplay.removeAll()
+        listVideoLinksToDisplay.removeAll()
+        listDocumentsToDisplay.removeAll()
+        
         switch type {
         case 0:
             loadNotes()
@@ -160,13 +162,100 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         loadMaterial(type: materialType.selectedSegmentIndex)
+        //let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        //view.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: - Filter Functions
+    func filterNotes(partial : Int?, tema: String?){
+        listNotesToDisplay.removeAll()
+        
+        if partial == nil && tema == nil {
+            displayAllNotes()
+        } else if partial == nil {
+            for note in listNotes {
+                if note.topic == tema {
+                    listNotesToDisplay.append(note)
+                }
+            }
+        } else if tema == nil {
+            for note in listNotes {
+                if Int(note.partial) == partial {
+                    listNotesToDisplay.append(note)
+                }
+            }
+        } else {
+            for note in listNotes {
+                if note.topic == tema && Int(note.partial) == partial {
+                    listNotesToDisplay.append(note)
+                }
+            }
+        }
+    }
+    
+    func filterVideoLinks(partial : Int?, tema: String?){
+        listVideoLinksToDisplay.removeAll()
+        
+        if partial == nil && tema == nil {
+            displayAllVideoLinks()
+        } else if partial == nil {
+            for videoLink in listVideoLinks {
+                if videoLink.topic == tema {
+                    listVideoLinksToDisplay.append(videoLink)
+                }
+            }
+        } else if tema == nil {
+            for videoLink in listVideoLinks {
+                if Int(videoLink.partial) == partial {
+                    listVideoLinksToDisplay.append(videoLink)
+                }
+            }
+        } else {
+            for videoLink in listVideoLinks {
+                print(Int(videoLink.partial))
+                print(partial!)
+                if videoLink.topic == tema && Int(videoLink.partial) == partial {
+                    listVideoLinksToDisplay.append(videoLink)
+                }
+            }
+        }
+    }
+    
+    func filterDocuments(partial : Int?, tema: String?){
+        listDocumentsToDisplay.removeAll()
+        
+        if partial == nil && tema == nil {
+            displayAllDocuments()
+        } else if partial == nil {
+            for document in listDocuments {
+                if document.topic == tema {
+                    listDocumentsToDisplay.append(document)
+                }
+            }
+        } else if tema == nil {
+            for document in listDocuments {
+                if Int(document.partial) == partial {
+                    listDocumentsToDisplay.append(document)
+                }
+            }
+        } else {
+            for document in listDocuments {
+                if document.topic == tema && Int(document.partial) == partial {
+                    listDocumentsToDisplay.append(document)
+                }
+            }
+        }
+    }
+    
     // MARK: - IBActions
+    
+    //@IBAction func hideKeyboard() {
+    //    view.endEditing(true)
+    //}
     
     @IBAction func createNewMaterial(_ sender: UIButton) {
         if materialType.selectedSegmentIndex == 0 {
@@ -185,7 +274,26 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         segCtrlAsc.selectedSegmentIndex = 0
         
         var partial : Int?
-        var tema: String?
+        var tema : String?
+        
+        partial = nil
+        tema = nil
+        
+        if let extractParcial = tfParcial.text {
+            if extractParcial.trimmingCharacters(in: CharacterSet(charactersIn: " ")).count == 0 {
+                partial = nil
+            }
+            else {
+                if let partialInt = Int(extractParcial) {
+                    partial = partialInt
+                } else {
+                    let alert = UIAlertController(title: "Dato inválido", message: "El campo de 'Parcial' debe ser numérico", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
+            }
+        }
         
         if tfParcial.text == nil || tfParcial.text!.trimmingCharacters(in: CharacterSet(charactersIn: " ")).count == 0 {
             partial = nil
@@ -200,19 +308,22 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         
-        if tfTema.text == nil || tfParcial.text!.trimmingCharacters(in: CharacterSet(charactersIn: " ")).count == 0 {
-            tema = nil
-        } else {
-            tema = tfTema.text
+        if let extractTema = tfTema.text {
+            if extractTema.trimmingCharacters(in: CharacterSet(charactersIn: " ")).count == 0 {
+                tema = nil
+            }
+            else {
+                tema = extractTema
+            }
         }
         
         switch materialType.selectedSegmentIndex {
         case 0:
             filterNotes(partial: partial, tema: tema)
         case 1:
-            break
+            filterVideoLinks(partial: partial, tema: tema)
         case 2:
-            break
+            filterDocuments(partial: partial, tema: tema)
         default:
             break
         }
@@ -220,23 +331,26 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         tableView.reloadData()
     }
     
+    // MARK: - Sort Button Functions
+    
+    // Sorts the table when Nombre/Fecha SegmentedControl is clicked
     @IBAction func changeSortBy(_ sender: UISegmentedControl) {
         switch materialType.selectedSegmentIndex {
         case 0:
             if sender.selectedSegmentIndex == 0 {
                 if segCtrlAsc.selectedSegmentIndex == 0 {
-                    listNotes = listNotes.sorted(by: { $0.name! < $1.name!})
+                    listNotesToDisplay = listNotesToDisplay.sorted(by: { $0.name! < $1.name!})
                 }
                 else {
-                    listNotes = listNotes.sorted(by: {$0.name! > $1.name!})
+                    listNotesToDisplay = listNotesToDisplay.sorted(by: {$0.name! > $1.name!})
                 }
             }
             else {
                 if segCtrlAsc.selectedSegmentIndex == 0 {
-                    listNotes = listNotes.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
+                    listNotesToDisplay = listNotesToDisplay.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
                 }
                 else {
-                    listNotes = listNotes.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
+                    listNotesToDisplay = listNotesToDisplay.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
                 }
             }
         case 1:
@@ -280,23 +394,24 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         tableView.reloadData()
     }
     
+    // Sorts the table when ASC/DESC SegmentedControl is clicked
     @IBAction func changeSortAsc(_ sender: UISegmentedControl) {
         switch materialType.selectedSegmentIndex {
         case 0:
             if segCtrlSortType.selectedSegmentIndex == 0 {
                 if sender.selectedSegmentIndex == 0 {
-                    listNotes = listNotes.sorted(by: { $0.name! < $1.name!})
+                    listNotesToDisplay = listNotesToDisplay.sorted(by: { $0.name! < $1.name!})
                 }
                 else {
-                    listNotes = listNotes.sorted(by: {$0.name! > $1.name!})
+                    listNotesToDisplay = listNotesToDisplay.sorted(by: {$0.name! > $1.name!})
                 }
             }
             else {
                 if sender.selectedSegmentIndex == 0 {
-                    listNotes = listNotes.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
+                    listNotesToDisplay = listNotesToDisplay.sorted(by: { Int($0.date!.timeIntervalSince1970) < Int($1.date!.timeIntervalSince1970)})
                 }
                 else {
-                    listNotes = listNotes.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
+                    listNotesToDisplay = listNotesToDisplay.sorted(by: {Int($0.date!.timeIntervalSince1970) > Int($1.date!.timeIntervalSince1970)})
                 }
             }
         case 1:
@@ -348,9 +463,9 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         case 0:
             return listNotesToDisplay.count
         case 1:
-            return listVideoLinks.count
+            return listVideoLinksToDisplay.count
         case 2:
-            return listDocuments.count
+            return listDocumentsToDisplay.count
         default:
             return 0
         }
@@ -362,9 +477,9 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         case 0:
             celda.lbName.text = listNotesToDisplay[indexPath.row].name
         case 1:
-            celda.lbName.text = listVideoLinks[indexPath.row].name
+            celda.lbName.text = listVideoLinksToDisplay[indexPath.row].name
         case 2:
-            celda.lbName.text = listDocuments[indexPath.row].name
+            celda.lbName.text = listDocumentsToDisplay[indexPath.row].name
         default:
             break
         }
@@ -384,7 +499,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         currentCourse.addToHasNote(material)
         
         for image in listImages {
-            if CoreDataUtilities.saveToDocumentDirectory(image: image, id: imageId) {
+            if CoreDataUtilities.saveToDocumentDirectory(image: image, id: String(imageId) + ".jpeg") {
                 let imageAsCoreData = Image(context: PersistenceService.context)
                 imageAsCoreData.id = Int32(imageId)
                 material.addToHasImage(imageAsCoreData)
@@ -404,7 +519,10 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     func addMaterial(material: VideoLink) {
         material.isTheory = self.isTheory
         currentCourse.addToHasVideoLink(material)
+        
         listVideoLinks.append(material)
+        listVideoLinksToDisplay.removeAll()
+        displayAllVideoLinks()
         PersistenceService.saveContext()
         tableView.reloadData()
     }
@@ -412,7 +530,10 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     func addMaterial(material: Document) {
         material.isTheory = self.isTheory
         currentCourse.addToHasDocument(material)
+        
         listDocuments.append(material)
+        listDocumentsToDisplay.removeAll()
+        displayAllDocuments()
         PersistenceService.saveContext()
         tableView.reloadData()
     }
@@ -442,6 +563,11 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         listDocuments.remove(at: lastSelectedCell)
         self.tableView.reloadData()
         PersistenceService.saveContext()
+    }
+    
+    func editMaterial() {
+        PersistenceService.saveContext()
+        tableView.reloadData()
     }
 
     // MARK: - Navigation
@@ -485,8 +611,12 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             viewMaterialInfo.materialType = materialType.selectedSegmentIndex
             viewMaterialInfo.materialView = self
             if materialType.selectedSegmentIndex == 1 {
+                viewMaterialInfo.isNewNote = false
                 viewMaterialInfo.isNewVideoLink = true
+                viewMaterialInfo.isNewDocument = false
             } else {
+                viewMaterialInfo.isNewNote = false
+                viewMaterialInfo.isNewVideoLink = false
                 viewMaterialInfo.isNewDocument = true
             }
         } else if segue.identifier == "materialInfo" {
@@ -502,11 +632,17 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             case 0:
                 viewMaterialInfo.currentNote = listNotesToDisplay[lastSelectedCell]
                 viewMaterialInfo.isNewNote = false
-            case 1:
-                viewMaterialInfo.currentVideoLink = listVideoLinks[lastSelectedCell]
                 viewMaterialInfo.isNewVideoLink = false
+                viewMaterialInfo.isNewDocument = false
+            case 1:
+                viewMaterialInfo.currentVideoLink = listVideoLinksToDisplay[lastSelectedCell]
+                viewMaterialInfo.isNewNote = false
+                viewMaterialInfo.isNewVideoLink = false
+                viewMaterialInfo.isNewDocument = false
             case 2:
-                viewMaterialInfo.currentDocument = listDocuments[lastSelectedCell]
+                viewMaterialInfo.currentDocument = listDocumentsToDisplay[lastSelectedCell]
+                viewMaterialInfo.isNewNote = false
+                viewMaterialInfo.isNewVideoLink = false
                 viewMaterialInfo.isNewDocument = false
             default:
                 break

@@ -12,7 +12,7 @@ import CoreData
 protocol protocolManageCourses {
     func addCourse(course: Course)
     func delCourse(course: Course)
-    func editCourse(course: Course)
+    func editCourse()
 }
 
 class CourseInfoViewController: UIViewController {
@@ -43,6 +43,9 @@ class CourseInfoViewController: UIViewController {
             btAction.setTitle("Editar", for: .normal)
             btDelete.isHidden = false
         }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,8 +93,12 @@ class CourseInfoViewController: UIViewController {
     
     func editCourse(name: String) {
         updateCourseValues(course: currentCourse, name: name)
-        courseView.editCourse(course: currentCourse)
+        courseView.editCourse()
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func hideKeyboard() {
+        view.endEditing(true)
     }
     
     @IBAction func saveCourse(_ sender: UIButton) {

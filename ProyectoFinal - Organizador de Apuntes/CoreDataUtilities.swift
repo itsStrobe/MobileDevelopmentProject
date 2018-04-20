@@ -30,8 +30,8 @@ class CoreDataUtilities: NSObject {
         return 1
     }
     
-    static func saveToDocumentDirectory(image: UIImage, id: Int) -> Bool {
-        let path = documentDirectory.appendingPathComponent(String(id))
+    static func saveToDocumentDirectory(image: UIImage, id: String) -> Bool {
+        let path = documentDirectory.appendingPathComponent(id)
         var successWrite: Bool = false
         
         if let imageAsData = UIImagePNGRepresentation(image) {

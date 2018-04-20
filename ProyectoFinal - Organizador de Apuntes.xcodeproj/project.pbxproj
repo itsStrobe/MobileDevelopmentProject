@@ -363,6 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D7R8PPR9PN;
 				INFOPLIST_FILE = "ProyectoFinal - Organizador de Apuntes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mx.itesm.ProyectoFinal---Organizador-de-Apuntes";
@@ -377,6 +378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D7R8PPR9PN;
 				INFOPLIST_FILE = "ProyectoFinal - Organizador de Apuntes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mx.itesm.ProyectoFinal---Organizador-de-Apuntes";

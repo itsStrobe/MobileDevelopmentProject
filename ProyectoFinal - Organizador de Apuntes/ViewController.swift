@@ -101,7 +101,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.reloadData()
     }
     
-    func editCourse(course: Course) {
+    func editCourse() {
         PersistenceService.saveContext()
     }
 
