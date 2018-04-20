@@ -160,6 +160,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         loadMaterial(type: materialType.selectedSegmentIndex)
+        tfTema.loadDropdownData(data: ["Tema 1", "Tema 2", "Tema 3"])
     }
 
     override func didReceiveMemoryWarning() {

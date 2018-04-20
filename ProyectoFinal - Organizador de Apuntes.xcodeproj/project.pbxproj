@@ -12,6 +12,8 @@
 		B68107232069FE53008CE786 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68107202069FE53008CE786 /* Note+CoreDataProperties.swift */; };
 		B6CBB137206C311C001D637A /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBB136206C311C001D637A /* ImageTableViewCell.swift */; };
 		B6CBB139206C3936001D637A /* CoreDataUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBB138206C3936001D637A /* CoreDataUtilities.swift */; };
+		FB18974A208A444300024C8F /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB189749208A444300024C8F /* UITextFieldExtension.swift */; };
+		FB18974C208A44AD00024C8F /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB18974B208A44AD00024C8F /* CustomPickerView.swift */; };
 		FB1B0B16207416AA0006FFB7 /* VideoLink+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1B0B13207416AA0006FFB7 /* VideoLink+CoreDataClass.swift */; };
 		FB1B0B17207416AA0006FFB7 /* VideoLink+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1B0B14207416AA0006FFB7 /* VideoLink+CoreDataProperties.swift */; };
 		FB20BE1120587F400001C4F1 /* CourseMaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */; };
@@ -42,6 +44,8 @@
 		B68107202069FE53008CE786 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B6CBB136206C311C001D637A /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		B6CBB138206C3936001D637A /* CoreDataUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUtilities.swift; sourceTree = "<group>"; };
+		FB189749208A444300024C8F /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		FB18974B208A44AD00024C8F /* CustomPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 		FB1B0B13207416AA0006FFB7 /* VideoLink+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoLink+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FB1B0B14207416AA0006FFB7 /* VideoLink+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoLink+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMaterialViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 				FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */,
 				FB894E832053377D0013B6FD /* CustomTableViewCell.swift */,
 				FB894E72205336D50013B6FD /* Main.storyboard */,
+				FB189749208A444300024C8F /* UITextFieldExtension.swift */,
+				FB18974B208A44AD00024C8F /* CustomPickerView.swift */,
 				FB21DB362087E46800DAB8B4 /* ImageViewerController.swift */,
 				B6CBB138206C3936001D637A /* CoreDataUtilities.swift */,
 				B6CBB136206C311C001D637A /* ImageTableViewCell.swift */,
@@ -212,6 +218,7 @@
 				FB894E71205336D50013B6FD /* ViewController.swift in Sources */,
 				FBA75B1320589C3100546CEE /* MaterialTableViewCell.swift in Sources */,
 				B68107222069FE53008CE786 /* Image+CoreDataProperties.swift in Sources */,
+				FB18974A208A444300024C8F /* UITextFieldExtension.swift in Sources */,
 				FB596BFA207D6201007902C7 /* Course+CoreDataProperties.swift in Sources */,
 				FBA75B152058A23D00546CEE /* NoteContentViewController.swift in Sources */,
 				FB20BE1120587F400001C4F1 /* CourseMaterialViewController.swift in Sources */,
@@ -222,6 +229,7 @@
 				FB894E86205337860013B6FD /* NoteTypeSelectionViewController.swift in Sources */,
 				B65E18AA2069AF4B0012FD4D /* Image+CoreDataClass.swift in Sources */,
 				FB894E88205345D00013B6FD /* CourseInfoViewController.swift in Sources */,
+				FB18974C208A44AD00024C8F /* CustomPickerView.swift in Sources */,
 				FB596BF8207D6201007902C7 /* Document+CoreDataClass.swift in Sources */,
 				FBA75B112058990100546CEE /* MaterialInfoViewController.swift in Sources */,
 				B6CBB139206C3936001D637A /* CoreDataUtilities.swift in Sources */,
