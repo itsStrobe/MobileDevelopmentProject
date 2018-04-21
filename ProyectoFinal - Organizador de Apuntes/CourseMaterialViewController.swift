@@ -162,8 +162,9 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         loadMaterial(type: materialType.selectedSegmentIndex)
-        //let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        //view.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -253,9 +254,9 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     
     // MARK: - IBActions
     
-    //@IBAction func hideKeyboard() {
-    //    view.endEditing(true)
-    //}
+    @IBAction func hideKeyboard() {
+        view.endEditing(true)
+    }
     
     @IBAction func createNewMaterial(_ sender: UIButton) {
         if materialType.selectedSegmentIndex == 0 {

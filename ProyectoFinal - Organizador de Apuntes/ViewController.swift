@@ -45,6 +45,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "cellCourse") as! CustomTableViewCell
         celda.lbName.text = listCourses[indexPath.row].name
+        // https://www.behance.net/gallery/9571075/Flat-Design-UI-Components
+        celda.contentView.backgroundColor = UIColor(red: 57, green: 66, blue: 100, alpha: 1)
         return celda
     }
     
