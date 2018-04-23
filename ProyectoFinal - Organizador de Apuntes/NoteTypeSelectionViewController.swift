@@ -9,12 +9,13 @@
 import UIKit
 
 class NoteTypeSelectionViewController: UIViewController {
+    @IBOutlet weak var btPractice: UIButton!
+    @IBOutlet weak var btTheory: UIButton!
     
     var currentCourse : Course!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.title = currentCourse.name
     }
 

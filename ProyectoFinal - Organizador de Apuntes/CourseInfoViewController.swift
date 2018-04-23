@@ -32,6 +32,8 @@ class CourseInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Información del Curso"
+        btAction.layer.cornerRadius = 0.125 * btAction.bounds.size.width
+        btDelete.layer.cornerRadius = 0.125 * btDelete.bounds.size.width
         btDelete.isHidden = true
 
         if isNew == false {

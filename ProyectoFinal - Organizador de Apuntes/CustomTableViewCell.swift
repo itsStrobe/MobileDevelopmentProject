@@ -15,11 +15,6 @@ class CustomTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
-        let selectedBackgroundView = UIView()
-        selectedBackgroundView.backgroundColor = UIColor(red: 0, green: 114, blue: 187, alpha: 100)
-        self.selectedBackgroundView = selectedBackgroundView
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
