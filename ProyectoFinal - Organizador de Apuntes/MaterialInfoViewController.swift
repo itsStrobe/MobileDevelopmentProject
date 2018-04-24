@@ -26,6 +26,7 @@ class MaterialInfoViewController: UIViewController {
     @IBOutlet weak var tfTopic: UITextField!
     @IBOutlet weak var tfPartial: UITextField!
     @IBOutlet weak var btDelete: UIButton!
+    @IBOutlet weak var btAction: UIButton!
     @IBOutlet weak var tfVideoLink: UITextField!
     @IBOutlet weak var stVideoLink: UIStackView!
     @IBOutlet weak var tfDocument: UITextField!
@@ -45,6 +46,7 @@ class MaterialInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        customizeUI()
 
         stDocument.isHidden = true
         stVideoLink.isHidden = true
@@ -97,6 +99,11 @@ class MaterialInfoViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func customizeUI() {
+        btAction.layer.cornerRadius = 0.125 * btAction.bounds.size.width
+        btDelete.layer.cornerRadius = 0.125 * btDelete.bounds.size.width
     }
     
     // Returns a tuple with the following elements:

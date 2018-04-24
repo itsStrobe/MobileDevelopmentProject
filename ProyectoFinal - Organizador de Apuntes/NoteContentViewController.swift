@@ -32,6 +32,7 @@ class NoteContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        customizeUI()
         listImages = [UIImage]()
         listImagesId = [Int]()
         listImagesCoreDataToDelete = [Image]()
@@ -58,6 +59,12 @@ class NoteContentViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func customizeUI() {
+        btNewPhoto.layer.cornerRadius = 0.125 * btNewPhoto.bounds.size.width
+        btPhotoLibrary.layer.cornerRadius = 0.125 * btPhotoLibrary.bounds.size.width
+        btSaveEdit.layer.cornerRadius = 0.125 * btNewPhoto.bounds.size.width
     }
     
     func loadImages() {
@@ -205,10 +212,6 @@ class NoteContentViewController: UIViewController {
             viewMaterialInfo.isNewVideoLink = false
             viewMaterialInfo.listImages = self.listImages
             viewMaterialInfo.materialType = 0
-        } else if segue.identifier == "ImageViewer" {
-            let viewImageViewer = segue.destination as! ImageViewerController
-            let indexPath = tableView.indexPathForSelectedRow!
-            viewImageViewer.image = listImages[indexPath.row]
         }
     }
 }

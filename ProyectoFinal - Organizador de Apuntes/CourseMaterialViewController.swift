@@ -14,6 +14,10 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var materialType: UISegmentedControl!
+    @IBOutlet weak var btNew: UIButton!
+    @IBOutlet weak var btFilter: UIButton!
+    @IBOutlet weak var scNameDate: UISegmentedControl!
+    
     var isTheory : Bool!
     var lastSelectedCell : Int!
     var currentCourse : Course!
@@ -28,6 +32,31 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var tfParcial: UITextField!
     @IBOutlet weak var segCtrlSortType: UISegmentedControl!
     @IBOutlet weak var segCtrlAsc: UISegmentedControl!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        customizeUI()
+        
+        if isTheory {
+            self.title = currentCourse.name! + ": Teoría"
+        } else {
+            self.title = currentCourse.name! + ": Práctica"
+        }
+        
+        loadMaterial(type: materialType.selectedSegmentIndex)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func customizeUI() {
+        btNew.layer.cornerRadius = 0.125 * scNameDate.bounds.size.width
+        btFilter.layer.cornerRadius = 0.125 * scNameDate.bounds.size.width
+    }
     
     func displayAllNotes() {
         for note in listNotes {
@@ -150,25 +179,6 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         let alert = UIAlertController(title: "Link inválido", message: "La entrada seleccionada no contiene un link válido.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if isTheory {
-            self.title = currentCourse.name! + ": Teoría"
-        } else {
-            self.title = currentCourse.name! + ": Práctica"
-        }
-        
-        loadMaterial(type: materialType.selectedSegmentIndex)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     // MARK: - Filter Functions

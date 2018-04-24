@@ -16,7 +16,6 @@
 		FB1B0B17207416AA0006FFB7 /* VideoLink+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1B0B14207416AA0006FFB7 /* VideoLink+CoreDataProperties.swift */; };
 		FB20BE1120587F400001C4F1 /* CourseMaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */; };
 		FB20BE1C205889B70001C4F1 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20BE19205889B70001C4F1 /* Note+CoreDataClass.swift */; };
-		FB21DB372087E46800DAB8B4 /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB21DB362087E46800DAB8B4 /* ImageViewerController.swift */; };
 		FB596BF8207D6201007902C7 /* Document+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB596BF5207D6201007902C7 /* Document+CoreDataClass.swift */; };
 		FB596BF9207D6201007902C7 /* Document+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB596BF6207D6201007902C7 /* Document+CoreDataProperties.swift */; };
 		FB596BFA207D6201007902C7 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB596BF7207D6201007902C7 /* Course+CoreDataProperties.swift */; };
@@ -46,7 +45,6 @@
 		FB1B0B14207416AA0006FFB7 /* VideoLink+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoLink+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FB20BE1020587F400001C4F1 /* CourseMaterialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMaterialViewController.swift; sourceTree = "<group>"; };
 		FB20BE19205889B70001C4F1 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FB21DB362087E46800DAB8B4 /* ImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; };
 		FB596BF5207D6201007902C7 /* Document+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FB596BF6207D6201007902C7 /* Document+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Document+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FB596BF7207D6201007902C7 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 				FB894E85205337860013B6FD /* NoteTypeSelectionViewController.swift */,
 				FB894E832053377D0013B6FD /* CustomTableViewCell.swift */,
 				FB894E72205336D50013B6FD /* Main.storyboard */,
-				FB21DB362087E46800DAB8B4 /* ImageViewerController.swift */,
 				B6CBB138206C3936001D637A /* CoreDataUtilities.swift */,
 				B6CBB136206C311C001D637A /* ImageTableViewCell.swift */,
 				FBA75B142058A23D00546CEE /* NoteContentViewController.swift */,
@@ -225,7 +222,6 @@
 				FB596BF8207D6201007902C7 /* Document+CoreDataClass.swift in Sources */,
 				FBA75B112058990100546CEE /* MaterialInfoViewController.swift in Sources */,
 				B6CBB139206C3936001D637A /* CoreDataUtilities.swift in Sources */,
-				FB21DB372087E46800DAB8B4 /* ImageViewerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
