@@ -439,51 +439,51 @@
                                     <action selector="changeMaterialType:" destination="8Xc-pt-IkB" eventType="valueChanged" id="efC-by-2Wl"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pXU-NI-0d6">
-                                <rect key="frame" x="0.0" y="257" width="320" height="145"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sYo-Sp-ncq">
+                                <rect key="frame" x="0.0" y="257" width="320" height="140"/>
                                 <color key="backgroundColor" red="0.23043695089999999" green="0.25578355790000001" blue="0.38040760159999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellMaterial" rowHeight="44" id="dfH-Be-aEY" customClass="MaterialTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="-1" reuseIdentifier="cellMaterial" id="H3J-CL-lPg" customClass="MaterialTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dfH-Be-aEY" id="uag-Q0-fVW" customClass="MaterialTableViewCell" customModule="ProyectoFinal___Organizador_de_Apuntes" customModuleProvider="target">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H3J-CL-lPg" id="wZv-MD-Lkl">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuU-iD-5cu">
-                                                    <rect key="frame" x="260" y="7" width="30" height="30"/>
-                                                    <state key="normal" title="Info">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <connections>
-                                                        <segue destination="QB2-qL-0Lf" kind="show" identifier="materialInfo" id="KLl-vS-RZA"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="&lt;Material Name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="Xo1-1g-dSf">
-                                                    <rect key="frame" x="30" y="12.5" width="215" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="&lt;Material Name&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5Y-9b-wSa">
+                                                    <rect key="frame" x="30" y="11" width="215" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="je2-TW-Vl9">
+                                                    <rect key="frame" x="260" y="6" width="30" height="30"/>
+                                                    <state key="normal" title="Info">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <segue destination="QB2-qL-0Lf" kind="show" identifier="materialInfo" id="xQO-k9-SA8"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="MuU-iD-5cu" secondAttribute="trailing" constant="30" id="LC7-jJ-p7J"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Xo1-1g-dSf" secondAttribute="bottom" constant="1.5" id="OCa-7r-JVT"/>
-                                                <constraint firstItem="Xo1-1g-dSf" firstAttribute="top" secondItem="uag-Q0-fVW" secondAttribute="topMargin" constant="1.5" id="ZNO-P3-jbi"/>
-                                                <constraint firstItem="Xo1-1g-dSf" firstAttribute="leading" secondItem="uag-Q0-fVW" secondAttribute="leading" constant="30" id="q4c-L4-mX2"/>
-                                                <constraint firstItem="MuU-iD-5cu" firstAttribute="leading" secondItem="Xo1-1g-dSf" secondAttribute="trailing" constant="15" id="uoq-YA-eT6"/>
+                                                <constraint firstItem="i5Y-9b-wSa" firstAttribute="centerY" secondItem="wZv-MD-Lkl" secondAttribute="centerY" id="FIV-zK-cyP"/>
+                                                <constraint firstItem="je2-TW-Vl9" firstAttribute="leading" secondItem="i5Y-9b-wSa" secondAttribute="trailing" constant="15" id="gtP-5K-e0P"/>
+                                                <constraint firstAttribute="trailing" secondItem="je2-TW-Vl9" secondAttribute="trailing" constant="30" id="jMF-cq-zOL"/>
+                                                <constraint firstItem="je2-TW-Vl9" firstAttribute="centerY" secondItem="wZv-MD-Lkl" secondAttribute="centerY" id="yGg-pQ-u2e"/>
+                                                <constraint firstItem="i5Y-9b-wSa" firstAttribute="leading" secondItem="wZv-MD-Lkl" secondAttribute="leading" constant="30" id="zBR-vi-mGz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.23043695089999999" green="0.25578355790000001" blue="0.38040760159999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
-                                            <outlet property="lbName" destination="Xo1-1g-dSf" id="B0E-J6-nwP"/>
-                                            <segue destination="w69-40-xi6" kind="show" identifier="noteContent" id="DwF-K3-Mzj"/>
+                                            <outlet property="lbName" destination="i5Y-9b-wSa" id="8V6-fj-ccc"/>
+                                            <segue destination="w69-40-xi6" kind="show" identifier="noteContent" id="TWb-NQ-QKx"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="8Xc-pt-IkB" id="GwF-QZ-8ty"/>
-                                    <outlet property="delegate" destination="8Xc-pt-IkB" id="l3O-xH-bVS"/>
+                                    <outlet property="dataSource" destination="8Xc-pt-IkB" id="01d-ub-x3B"/>
+                                    <outlet property="delegate" destination="8Xc-pt-IkB" id="hB8-xG-ZvH"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -491,19 +491,19 @@
                         <constraints>
                             <constraint firstItem="Bd3-1V-Ppn" firstAttribute="top" secondItem="BdM-8V-zeJ" secondAttribute="bottom" constant="10" id="0zp-hz-MRc"/>
                             <constraint firstItem="DZm-C4-cHA" firstAttribute="trailing" secondItem="vcn-nm-DuO" secondAttribute="trailing" constant="30" id="FoL-oy-i7y"/>
-                            <constraint firstItem="pXU-NI-0d6" firstAttribute="top" secondItem="Bd3-1V-Ppn" secondAttribute="bottom" constant="15" id="GgL-yd-TLf"/>
                             <constraint firstItem="iIT-JM-E03" firstAttribute="trailing" secondItem="DZm-C4-cHA" secondAttribute="trailing" id="KgP-HC-mdC"/>
                             <constraint firstItem="BdM-8V-zeJ" firstAttribute="leading" secondItem="DZm-C4-cHA" secondAttribute="leading" constant="30" id="OCY-ev-Iwh"/>
-                            <constraint firstItem="pXU-NI-0d6" firstAttribute="leading" secondItem="DZm-C4-cHA" secondAttribute="leading" id="P3d-zU-3wm"/>
                             <constraint firstItem="vcn-nm-DuO" firstAttribute="leading" secondItem="DZm-C4-cHA" secondAttribute="leading" constant="30" id="SEy-IM-Zaf"/>
+                            <constraint firstItem="vcn-nm-DuO" firstAttribute="top" secondItem="sYo-Sp-ncq" secondAttribute="bottom" constant="15" id="Tpp-kd-aQz"/>
                             <constraint firstItem="iIT-JM-E03" firstAttribute="top" secondItem="vcn-nm-DuO" secondAttribute="bottom" constant="10" id="Vn3-1c-aPB"/>
+                            <constraint firstItem="sYo-Sp-ncq" firstAttribute="top" secondItem="Bd3-1V-Ppn" secondAttribute="bottom" constant="15" id="WJg-lg-EUe"/>
                             <constraint firstItem="DZm-C4-cHA" firstAttribute="trailing" secondItem="BdM-8V-zeJ" secondAttribute="trailing" constant="30" id="WwL-oA-msd"/>
+                            <constraint firstItem="sYo-Sp-ncq" firstAttribute="leading" secondItem="DZm-C4-cHA" secondAttribute="leading" id="XlS-se-iKO"/>
+                            <constraint firstItem="DZm-C4-cHA" firstAttribute="trailing" secondItem="sYo-Sp-ncq" secondAttribute="trailing" id="ZVu-v3-eor"/>
                             <constraint firstItem="Bd3-1V-Ppn" firstAttribute="leading" secondItem="DZm-C4-cHA" secondAttribute="leading" constant="30" id="a1V-d2-e2F"/>
-                            <constraint firstItem="vcn-nm-DuO" firstAttribute="top" secondItem="pXU-NI-0d6" secondAttribute="bottom" constant="10" id="agq-04-jIG"/>
                             <constraint firstItem="BdM-8V-zeJ" firstAttribute="top" secondItem="DZm-C4-cHA" secondAttribute="top" constant="30" id="fs6-JI-h4v"/>
                             <constraint firstItem="iIT-JM-E03" firstAttribute="bottom" secondItem="DZm-C4-cHA" secondAttribute="bottom" id="h40-7r-AlT"/>
                             <constraint firstItem="DZm-C4-cHA" firstAttribute="trailing" secondItem="Bd3-1V-Ppn" secondAttribute="trailing" constant="30" id="hNN-Fg-Zii"/>
-                            <constraint firstItem="pXU-NI-0d6" firstAttribute="trailing" secondItem="DZm-C4-cHA" secondAttribute="trailing" id="ydN-s3-EO2"/>
                             <constraint firstItem="iIT-JM-E03" firstAttribute="leading" secondItem="DZm-C4-cHA" secondAttribute="leading" id="zty-7f-d9N"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DZm-C4-cHA"/>
@@ -515,7 +515,7 @@
                         <outlet property="scNameDate" destination="BPT-Sv-he1" id="uSt-rP-KDg"/>
                         <outlet property="segCtrlAsc" destination="ew4-F8-bdp" id="Qcw-vm-YjF"/>
                         <outlet property="segCtrlSortType" destination="BPT-Sv-he1" id="xI9-h3-Rzy"/>
-                        <outlet property="tableView" destination="pXU-NI-0d6" id="S6L-MX-JEU"/>
+                        <outlet property="tableView" destination="sYo-Sp-ncq" id="uD6-ry-D4b"/>
                         <outlet property="tfParcial" destination="q26-Aw-bTc" id="mFf-B3-Bdr"/>
                         <outlet property="tfTema" destination="32i-aO-7fc" id="W9e-AY-6zi"/>
                         <segue destination="w69-40-xi6" kind="show" identifier="newNote" id="PgA-ty-ulo"/>
@@ -875,8 +875,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KLl-vS-RZA"/>
-        <segue reference="DwF-K3-Mzj"/>
+        <segue reference="xQO-k9-SA8"/>
+        <segue reference="TWb-NQ-QKx"/>
         <segue reference="29D-en-Qb4"/>
         <segue reference="C5s-5c-OTV"/>
     </inferredMetricsTieBreakers>

@@ -600,7 +600,6 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
                 return false
             }
         }
-        
         return true
     }
 
