@@ -104,6 +104,7 @@ class MaterialInfoViewController: UIViewController {
     func customizeUI() {
         btAction.layer.cornerRadius = 0.125 * btAction.bounds.size.width
         btDelete.layer.cornerRadius = 0.125 * btDelete.bounds.size.width
+        datePicker.setValue(UIColor.white, forKey: "textColor")
     }
     
     // Returns a tuple with the following elements:
