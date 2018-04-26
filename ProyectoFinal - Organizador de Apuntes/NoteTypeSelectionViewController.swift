@@ -26,7 +26,7 @@ class NoteTypeSelectionViewController: UIViewController {
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // Executes whenever a segue is fired.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let viewMaterial = segue.destination as! CourseMaterialViewController
         

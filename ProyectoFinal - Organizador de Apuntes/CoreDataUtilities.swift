@@ -13,6 +13,9 @@ class CoreDataUtilities: NSObject {
     
     static let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
     
+    // Gets the next available image id, by checking the maximum id of the images
+    // stored in the persistent storage (core data and documentDirectory) and returning
+    // that number + 1.
     static func getNextImageId() -> Int {
         let imageRequest: NSFetchRequest<Image> = Image.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "id == max(id)")
@@ -30,10 +33,14 @@ class CoreDataUtilities: NSObject {
         return 1
     }
     
+    // Saves an image in the document directory. The image is saved with the name specified
+    // by the variable 'id'.
+    // Returns true if the image was successfully saved; false otherwise.
     static func saveToDocumentDirectory(image: UIImage, id: String) -> Bool {
         let path = documentDirectory.appendingPathComponent(id)
         var successWrite: Bool = false
         
+        // Check if the image can be represented as a PNG or JPG image.
         if let imageAsData = UIImagePNGRepresentation(image) {
             successWrite = NSData(data: imageAsData).write(toFile: path, atomically: true)
         } else if let imageAsData = UIImageJPEGRepresentation(image, 1.0){
@@ -43,6 +50,8 @@ class CoreDataUtilities: NSObject {
         return successWrite
     }
     
+    // Deletes the image stored in the documentDirectory as a file with the name specified
+    // by the variable 'id'.
     static func deleteImageFromDocumentDirectory(id: Int) {
         let fileManager = FileManager.default
         let path = documentDirectory.appendingPathComponent(String(id))

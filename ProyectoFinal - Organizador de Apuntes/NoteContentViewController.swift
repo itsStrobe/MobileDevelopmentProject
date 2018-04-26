@@ -61,12 +61,15 @@ class NoteContentViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    // Customizes the properties of the UI elements in the view.
     func customizeUI() {
+        // Rounds the edges of the buttons in the view
         btNewPhoto.layer.cornerRadius = 0.125 * btNewPhoto.bounds.size.width
         btPhotoLibrary.layer.cornerRadius = 0.125 * btPhotoLibrary.bounds.size.width
         btSaveEdit.layer.cornerRadius = 0.125 * btNewPhoto.bounds.size.width
     }
     
+    // Loads the images that are linked to the current course in the persistent storage.
     func loadImages() {
         let imagesRequest: NSFetchRequest<Image> = Image.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "belongsTo.name == %@", currentNote.name!)
@@ -80,14 +83,17 @@ class NoteContentViewController: UIViewController {
             return
         }
         
+        // Iterates over the image objects obtained from the core data persistent storage.
         for imageCoreData in listImagesCoreData {
+            // Gets the image stored in the documentDirectory by the using the 'id' attribute of the
+            // imageCoreData object. Adds the image to 'listImages' and adds the id to 'listImagesId'.
             let imageURL = URL(fileURLWithPath: CoreDataUtilities.documentDirectory as String).appendingPathComponent(String(imageCoreData.id) + ".jpeg")
-            print ("FIRST URL ", imageURL)
             listImages.append(UIImage(contentsOfFile: imageURL.path)!)
             listImagesId.append(Int(imageCoreData.id))
         }
     }
     
+    // Saves new images to the document directory.
     func saveNewImages() {
         var imageId = CoreDataUtilities.getNextImageId()
         
@@ -104,7 +110,10 @@ class NoteContentViewController: UIViewController {
         PersistenceService.saveContext()
     }
     
+    // Deletes undesired images from the document directory.
+    // The 'id' of the images is also deleted from the core data storage.
     func deleteUndesiredImages() {
+        // Iterates over all images to delete and deletes them.
         for imageCoreData in listImagesCoreDataToDelete {
             CoreDataUtilities.deleteImageFromDocumentDirectory(id: Int(imageCoreData.id))
             PersistenceService.context.delete(imageCoreData)
@@ -112,10 +121,12 @@ class NoteContentViewController: UIViewController {
         PersistenceService.saveContext()
     }
     
+    // Hides the keyboard
     @IBAction func hideKeyboard() {
         view.endEditing(true)
     }
 
+    // Opens the library of photos.
     @IBAction func openPhotoLibrary(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             let imagePicker = UIImagePickerController()
@@ -126,6 +137,7 @@ class NoteContentViewController: UIViewController {
         }
     }
     
+    // Opens the camera of the device.
     @IBAction func openCamera(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let imagePicker = UIImagePickerController()
@@ -136,6 +148,7 @@ class NoteContentViewController: UIViewController {
             present(imagePicker, animated: true, completion: nil)
         }
     }
+    
     
     @IBAction func eliminatePhoto(_ sender: UIButton) {
         let view = sender.superview!

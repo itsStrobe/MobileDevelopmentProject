@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let coursesRequest: NSFetchRequest<Course> = Course.fetchRequest()
         
+        // Fetch all courses stored in the persistent storage.
         do {
             let data = try PersistenceService.context.fetch(coursesRequest)
             listCourses = data
@@ -58,12 +59,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - protocolManageCourses methods.
     
+    // Saves a course in the persistent storage and adds it to the list of courses being displayed
+    // in the table view.
     func addCourse(course: Course) {
         PersistenceService.saveContext()
         self.listCourses.append(course)
         self.tableView.reloadData()
     }
     
+    // Deletes a course from the persistent storage as well as all the materials associated with it.
     func delCourse(course: Course) {
         // Check if the course has notes.
         if let courseNotes = course.hasNote?.allObjects {
@@ -98,18 +102,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         
+        // Deletes the course.
         PersistenceService.context.delete(course)
         PersistenceService.saveContext()
         listCourses.remove(at: lastSelectedCell)
         self.tableView.reloadData()
     }
     
+    // Saves the changes made to the current context.
+    // It is assumed that this function is called after updating the values of a course.
     func editCourse() {
         PersistenceService.saveContext()
     }
 
      // MARK: - Navigation
     
+    // Executes whenever a segue is fired.
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "newCourse" {
             let viewCourseInfo = segue.destination as! CourseInfoViewController
@@ -120,6 +128,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             viewCourseInfo.isNew = false
             viewCourseInfo.courseView = self
             
+            // Gets the cell that contains the button that was clicked.
             let button = sender as! UIButton
             let view = button.superview!
             let cell = view.superview! as! CustomTableViewCell

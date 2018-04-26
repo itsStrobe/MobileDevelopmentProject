@@ -614,7 +614,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CR6-QG-nio">
                                                 <rect key="frame" x="141" y="0.0" width="119" height="30"/>
                                                 <color key="backgroundColor" red="0.3034249544" green="0.65061670540000005" blue="0.66275370119999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <state key="normal" title="Galeria">
+                                                <state key="normal" title="Galería">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -875,7 +875,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xQO-k9-SA8"/>
+        <segue reference="1bV-OY-Vc2"/>
         <segue reference="TWb-NQ-QKx"/>
         <segue reference="29D-en-Qb4"/>
         <segue reference="C5s-5c-OTV"/>
