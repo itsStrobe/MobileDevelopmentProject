@@ -43,6 +43,7 @@ class MaterialInfoViewController: UIViewController {
     var currentNote: Note!
     var currentVideoLink: VideoLink!
     var currentDocument: Document!
+    var listTopics = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,9 @@ class MaterialInfoViewController: UIViewController {
 
         stDocument.isHidden = true
         stVideoLink.isHidden = true
+        
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTopic.loadDropdownData(data: listTopics)
         
         switch materialType {
         case 0: // Handle notes.

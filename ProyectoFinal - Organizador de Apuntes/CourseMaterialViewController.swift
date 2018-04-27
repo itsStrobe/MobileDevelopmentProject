@@ -27,6 +27,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
     var listVideoLinksToDisplay = [VideoLink]()
     var listDocuments = [Document]()
     var listDocumentsToDisplay = [Document]()
+    var listTopics = [String]()
     
     @IBOutlet weak var tfTema: UITextField!
     @IBOutlet weak var tfParcial: UITextField!
@@ -44,6 +45,8 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         loadMaterial(type: materialType.selectedSegmentIndex)
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTema.loadDropdownData(data: listTopics)
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
@@ -120,8 +123,6 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             print("Could not retrieve data from notes")
         }
     }
-    
-    
     
     func loadMaterial(type : Int) {
         listNotesToDisplay.removeAll()
@@ -525,6 +526,8 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         displayAllNotes()
         PersistenceService.saveContext()
         tableView.reloadData()
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTema.loadDropdownData(data: listTopics)
     }
     
     func addMaterial(material: VideoLink) {
@@ -536,6 +539,8 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         displayAllVideoLinks()
         PersistenceService.saveContext()
         tableView.reloadData()
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTema.loadDropdownData(data: listTopics)
     }
     
     func addMaterial(material: Document) {
@@ -547,6 +552,8 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         displayAllDocuments()
         PersistenceService.saveContext()
         tableView.reloadData()
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTema.loadDropdownData(data: listTopics)
     }
     
     func delMaterial(material: Note) {
@@ -560,6 +567,8 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         listNotesToDisplay.remove(at: lastSelectedCell)
         self.tableView.reloadData()
         PersistenceService.saveContext()
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTema.loadDropdownData(data: listTopics)
     }
     
     func delMaterial(material: VideoLink) {
@@ -567,6 +576,8 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         listVideoLinks.remove(at: lastSelectedCell)
         self.tableView.reloadData()
         PersistenceService.saveContext()
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTema.loadDropdownData(data: listTopics)
     }
     
     func delMaterial(material: Document) {
@@ -574,11 +585,15 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
         listDocuments.remove(at: lastSelectedCell)
         self.tableView.reloadData()
         PersistenceService.saveContext()
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTema.loadDropdownData(data: listTopics)
     }
     
     func editMaterial() {
         PersistenceService.saveContext()
         tableView.reloadData()
+        listTopics = CustomPickerView.loadTopics(course: currentCourse)
+        tfTema.loadDropdownData(data: listTopics)
     }
 
     // MARK: - Navigation
@@ -620,6 +635,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             let viewMaterialInfo = segue.destination as! MaterialInfoViewController
             viewMaterialInfo.materialType = materialType.selectedSegmentIndex
             viewMaterialInfo.materialView = self
+            viewMaterialInfo.currentCourse = self.currentCourse
             if materialType.selectedSegmentIndex == 1 {
                 viewMaterialInfo.isNewNote = false
                 viewMaterialInfo.isNewVideoLink = true
@@ -659,6 +675,7 @@ class CourseMaterialViewController: UIViewController, UITableViewDelegate, UITab
             }
             
             viewMaterialInfo.materialView = self
+            viewMaterialInfo.currentCourse = self.currentCourse
         }
     }
 

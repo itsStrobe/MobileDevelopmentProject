@@ -33,6 +33,8 @@
 		FBA75B112058990100546CEE /* MaterialInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA75B102058990100546CEE /* MaterialInfoViewController.swift */; };
 		FBA75B1320589C3100546CEE /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA75B1220589C3100546CEE /* MaterialTableViewCell.swift */; };
 		FBA75B152058A23D00546CEE /* NoteContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA75B142058A23D00546CEE /* NoteContentViewController.swift */; };
+		FBD5CA58209376F4002603BE /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5CA57209376F4002603BE /* UITextFieldExtension.swift */; };
+		FBD5CA5A20937724002603BE /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5CA5920937724002603BE /* CustomPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		FBA75B102058990100546CEE /* MaterialInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialInfoViewController.swift; sourceTree = "<group>"; };
 		FBA75B1220589C3100546CEE /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTableViewCell.swift; sourceTree = "<group>"; };
 		FBA75B142058A23D00546CEE /* NoteContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentViewController.swift; sourceTree = "<group>"; };
+		FBD5CA57209376F4002603BE /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		FBD5CA5920937724002603BE /* CustomPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 		FB894E6D205336D50013B6FD /* ProyectoFinal - Organizador de Apuntes */ = {
 			isa = PBXGroup;
 			children = (
+				FBD5CA57209376F4002603BE /* UITextFieldExtension.swift */,
+				FBD5CA5920937724002603BE /* CustomPickerView.swift */,
 				FB596BF5207D6201007902C7 /* Document+CoreDataClass.swift */,
 				FB596BF6207D6201007902C7 /* Document+CoreDataProperties.swift */,
 				FB596BF7207D6201007902C7 /* Course+CoreDataProperties.swift */,
@@ -200,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB894E8A205348AA0013B6FD /* PersistenceService.swift in Sources */,
+				FBD5CA58209376F4002603BE /* UITextFieldExtension.swift in Sources */,
 				FB894E842053377D0013B6FD /* CustomTableViewCell.swift in Sources */,
 				FB894E8D20534AB00013B6FD /* Course+CoreDataClass.swift in Sources */,
 				B6CBB137206C311C001D637A /* ImageTableViewCell.swift in Sources */,
@@ -209,6 +216,7 @@
 				FB894E71205336D50013B6FD /* ViewController.swift in Sources */,
 				FBA75B1320589C3100546CEE /* MaterialTableViewCell.swift in Sources */,
 				B68107222069FE53008CE786 /* Image+CoreDataProperties.swift in Sources */,
+				FBD5CA5A20937724002603BE /* CustomPickerView.swift in Sources */,
 				FB596BFA207D6201007902C7 /* Course+CoreDataProperties.swift in Sources */,
 				FBA75B152058A23D00546CEE /* NoteContentViewController.swift in Sources */,
 				FB20BE1120587F400001C4F1 /* CourseMaterialViewController.swift in Sources */,
